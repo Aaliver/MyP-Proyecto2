@@ -1,0 +1,4 @@
+builddir/
+docs/reporte/*
+!docs/reporte/*.tex
+html/
