@@ -1,0 +1,163 @@
+\documentclass[12pt]{article}  % Tipo de archivo
+\usepackage[utf8]{inputenc}    % Codificación utf-8
+\usepackage[spanish]{babel}    % Idioma español
+\usepackage{graphicx}          % Necesario para imágenes
+
+\title{
+    \textsc{\Large Universidad Nacional Autónoma de México\\[0.2cm]
+        {\normalsize Facultad de Ciencias, 2027-I}\\[0.2cm]
+        {\normalsize Modelado y Programación}}\\[0.6cm]
+    \rule{\linewidth}{0.4pt}\\[0.4cm]
+    {\textsc{\Large {\color{maincolor}Proyecto:} Base de Datos Musical}}\\[0.1cm]
+    \rule{\linewidth}{0.4pt}\\[1em]
+}
+\author{
+    \textsc{Alumno:} Valeria Becerril Acosta\\[0.2cm]
+    \textsc{Número de cuenta:} 323128489\\[0.4cm]
+}
+\date{\today\\[2.6cm]}
+
+% PAQUETES DE ESTILO
+\usepackage{xcolor}           % Para definir y usar colores
+\usepackage{fancyhdr}         % Para los encabezados y pies de página fancy
+\usepackage{titlesec}         % Para configurar \titleformat
+\usepackage{enumitem}         % Para configurar \setlist
+\usepackage{lmodern}          % Para la familia de fuentes
+\usepackage[T1]{fontenc}      % Para codificación de fuente
+\usepackage{listings}         % Para el estilo de código mystyle
+\usepackage[most]{tcolorbox}  % Para los cuadros de color
+\usepackage{tabularx}         % Para el ancho de tablas
+\usepackage{hyperref}         % Para los enlaces
+
+% CONFIGURACIONES Y COLORES
+\definecolor{maincolor}{RGB}{0, 51, 102}
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{foldercolor}{RGB}{255, 193, 7}
+\definecolor{pdfcolor}{RGB}{220, 53, 69}
+\definecolor{readmecolor}{RGB}{40, 167, 69}
+\definecolor{txtcolor}{RGB}{0, 123, 255}
+
+% TARJETA CRC
+\newcommand{\crc}[3]{
+    \begin{center}
+        \begin{tcolorbox}[
+            colback=maincolor!10, colframe=maincolor,
+            colupper=black, fontupper=\footnotesize\ttfamily,
+            boxrule=0.2mm, arc=2pt,
+            left=3pt, right=3pt, top=1pt, bottom=1pt,
+            title={\fontseries{b}\selectfont\footnotesize Class
+                \begin{center}
+                    #1
+                \end{center}},
+            colbacktitle=maincolor!35,
+            coltitle=black,
+            toptitle=4pt, bottomtitle=4pt
+            ]
+
+            \begin{tabularx}{\linewidth}{@{}X|X@{}}
+              \textbf{\footnotesize Responsabilidades}
+              & \textbf{\footnotesize Colaboradores} \\[4pt]
+              \begin{itemize}[itemsep=-5pt, leftmargin=*]
+                  #2
+              \end{itemize}
+              &  \begin{itemize}[itemsep=-5pt, leftmargin=*]
+                  #3
+              \end{itemize}
+            \end{tabularx}
+        \end{tcolorbox}
+    \end{center}
+}
+
+% ESTILO DE CÓDIGO
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{maincolor!10},
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,
+    breaklines=true,
+    captionpos=b,
+    keepspaces=true,
+    numbers=left,
+    numbersep=5pt,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=2
+}
+\lstset{style=mystyle}
+
+% CONFIGURACIÓN DE ENCABEZADO Y PIE DE PÁGINA
+\pagestyle{fancy}
+\fancyhead[LO,L]{UNAM}
+\fancyhead[RO,R]{\textit{\textsc{Proyecto}}}
+\fancyfoot[LO,L]{Facultad De Ciencias, 2027-I}
+\fancyfoot[CO,C]{\thepage}
+\fancyfoot[RO,R]{Modelado y Programación}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+% CAMBIAR COLOR DE SECCIONES
+\titleformat{\section}
+{\color{maincolor}\normalfont\Large\bfseries}
+{\thesection}{1em}{}
+
+\titleformat{\subsection}
+{\color{maincolor}\normalfont\large\bfseries}
+{\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+{\color{maincolor}\normalfont\normalsize\bfseries}
+{\thesubsubsection}{1em}{}
+
+% CAMBIAR COLOR DE ÍTEMS EN LISTAS
+\setlist[enumerate]{label=\textcolor{maincolor}{\arabic*.}, left=1.5em}
+\setlist[itemize]{label=\textcolor{maincolor}{\alph*}, left=1.5em}
+\setlist[itemize,1]{label=\textcolor{maincolor}{\textbullet}, left=1.5em}
+
+
+% INICIO DEL DOCUMENTO
+\begin{document}
+
+\maketitle
+\thispagestyle{empty}
+
+\begin{abstract}
+    This is where you type the short summary of your article.
+    It explains the main goals, methods, and results of your work.
+\end{abstract}
+
+\newpage
+\tableofcontents
+
+\newpage
+\section{Introducción}
+
+
+
+\section{Problema}
+
+
+
+\section{Análisis}
+
+
+
+\section{Diseño}
+
+
+
+\section{Implementación}
+
+
+
+\section{Conclusión}
+
+
+
+% FIN DEL DOCUMENTO
+\end{document}
