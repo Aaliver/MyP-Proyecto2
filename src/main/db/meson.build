@@ -9,5 +9,6 @@ executable(
     'musical-db',
     'main.cpp',
     link_with: [lib_db, db_view],
-    install: true,
+    dependencies: qt6_dep,
+    install: true
 )
