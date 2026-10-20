@@ -1,4 +1,4 @@
-db_sources = files()
+db_sources = files('scanner.cpp')
 
 lib_db = static_library(
     'db_core',
@@ -8,7 +8,8 @@ lib_db = static_library(
 executable(
     'musical-db',
     'main.cpp',
-    link_with: [lib_db, db_view],
+    view_resources,
+    link_with: lib_db,
     dependencies: qt6_dep,
     install: true
 )
