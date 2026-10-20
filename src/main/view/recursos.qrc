@@ -1,5 +1,6 @@
 <!DOCTYPE RCC><RCC version="1.0">
 <qresource prefix="/">
-    <file>main.qml</file>
+    <file>Main.qml</file>
+    <file>Boton.qml</file>
 </qresource>
 </RCC>
