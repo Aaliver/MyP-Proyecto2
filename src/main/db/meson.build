@@ -1,4 +1,4 @@
-db_sources = files('scanner.cpp')
+db_sources = files('aplicacion.cpp', 'scanner.cpp')
 
 lib_db = static_library(
     'db_core',
