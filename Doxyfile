@@ -1,5 +1,6 @@
 PROJECT_NAME       = "Base de Datos Musical"
 INPUT              = src
 RECURSIVE          = YES
-OUTPUT_DIRECTORY   = ./docs
+OUTPUT_DIRECTORY   = docs
+CREATE_SUBDIRS     = YES
 GENERATE_LATEX     = NO
