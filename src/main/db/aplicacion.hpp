@@ -6,6 +6,7 @@
 #pragma once
 #include <string>
 #include <filesystem>
+#include "QQmlApplicationEngine"
 
 /**
  * @class Aplicacion
@@ -33,6 +34,8 @@ private:
 
   /* La ruta de entrada. */
   std::filesystem::path ruta;
+  /* El motor. */
+  QQmlApplicationEngine engine;
 
   /* Verifica que las entradas sean válidas. */
   void valida(int argc, char* argv[]);
