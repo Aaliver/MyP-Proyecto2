@@ -1,6 +1,8 @@
-#include "QGuiApplication"
-#include "aplicacion.hpp"
 #include <cstdio>
+
+#include <QGuiApplication>
+
+#include "aplicacion.hpp"
 
 int error(const char* mensaje) {
   std::fprintf(stderr, "%s\n", mensaje);
