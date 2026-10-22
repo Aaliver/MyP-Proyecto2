@@ -1,5 +1,8 @@
 #include "aplicacion.hpp"
 
+#include <QCoreApplication>
+#include <QGuiApplication>
+
 namespace fs = std::filesystem;
 
 Aplicacion::Aplicacion(int argc, char* argv[]) {
@@ -24,7 +27,7 @@ void Aplicacion::validaRuta(std::string ruta) {
 int Aplicacion::ejecuta() {
   const QUrl url(QStringLiteral("qrc:/Main.qml"));
   QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
-		   &app, [url](QObject *obj, const QUrl &objUrl) {
+		   qApp, [url](QObject *obj, const QUrl &objUrl) {
 		     if (!obj && url == objUrl)
 		       QCoreApplication::exit(-1);
 		   }, Qt::QueuedConnection);
