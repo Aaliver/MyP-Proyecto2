@@ -3,6 +3,7 @@ db_sources = files('aplicacion.cpp', 'scanner.cpp')
 lib_db = static_library(
     'db_core',
     db_sources,
+    dependencies: qt6_dep
 )
 
 executable(
