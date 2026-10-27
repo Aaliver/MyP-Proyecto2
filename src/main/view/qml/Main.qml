@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Controls.Material
+import QtMultimedia
 
 ApplicationWindow {
     id: window
@@ -39,6 +40,44 @@ ApplicationWindow {
 	    anchors.rightMargin: 5
 	    icon.source: "qrc:img/images/pickaxe.png"
 	    icon.color: "transparent"
+	}
+    }
+
+    footer: ToolBar {
+	id: mediaBar
+	height: 60
+
+	AudioOutput {
+            id: musicOut
+            volume: 1.0
+	}
+
+	MediaPlayer {
+            id: player
+            audioOutput: musicOut
+            source: ""
+	}
+
+	Row {
+            anchors.centerIn: parent
+            spacing: 20
+
+            Boton {
+		id: musicButton
+		height: 70
+		iconSource: musicButton.playMusic ?
+			"qrc:img/images/pause.png" : "qrc:img/images/play.png"
+
+		property bool playMusic: false
+
+		onClicked: {
+		    playMusic = !playMusic
+		    if (playMusic)
+			player.play()
+		    else
+			player.pause()
+		}
+            }
 	}
     }
 }
