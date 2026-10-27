@@ -19,4 +19,26 @@ ApplicationWindow {
         text: ".-."
         font.pixelSize: 24
     }
+
+    background: Rectangle {
+	id: buttonBar
+	height: 55
+	color: Material.accent
+
+	Button {
+	    icon.width: width
+	    anchors.left: parent.left
+	    anchors.leftMargin: 5
+	    icon.source: "qrc:img/images/edit.png"
+	    icon.color: "transparent"
+	}
+
+	Button {
+	    icon.width: width
+	    anchors.right: parent.right
+	    anchors.rightMargin: 5
+	    icon.source: "qrc:img/images/pickaxe.png"
+	    icon.color: "transparent"
+	}
+    }
 }
