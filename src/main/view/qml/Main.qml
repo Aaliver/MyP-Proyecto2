@@ -21,24 +21,25 @@ ApplicationWindow {
         font.pixelSize: 24
     }
 
-    background: Rectangle {
+    header: ToolBar {
 	id: buttonBar
-	height: 55
-	color: Material.accent
+	height: 50
 
-	Button {
-	    icon.width: width
+	Boton {
+	    width: 45
+            height: 45
 	    anchors.left: parent.left
-	    anchors.leftMargin: 5
-	    icon.source: "qrc:img/images/edit.png"
+	    anchors.leftMargin: 10
+	    iconSource: "qrc:img/images/edit.png"
 	    icon.color: "transparent"
 	}
 
-	Button {
-	    icon.width: width
+	Boton {
+	    width: 45
+            height: 45
 	    anchors.right: parent.right
-	    anchors.rightMargin: 5
-	    icon.source: "qrc:img/images/pickaxe.png"
+	    anchors.rightMargin: 10
+	    iconSource: "qrc:img/images/pickaxe.png"
 	    icon.color: "transparent"
 	}
     }
