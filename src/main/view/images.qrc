@@ -1,0 +1,8 @@
+<!DOCTYPE RCC><RCC version="1.0">
+<qresource prefix="/img">
+    <file>images/pickaxe.png</file>
+    <file>images/edit.png</file>
+    <file>images/play.png</file>
+    <file>images/pause.png</file>
+</qresource>
+</RCC>

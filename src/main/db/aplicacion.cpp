@@ -25,7 +25,7 @@ void Aplicacion::validaRuta(std::string ruta) {
 }
 
 int Aplicacion::ejecuta() {
-  const QUrl url(QStringLiteral("qrc:/Main.qml"));
+  const QUrl url(QStringLiteral("qrc:/qml/Main.qml"));
   QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
 		   qApp, [url](QObject *obj, const QUrl &objUrl) {
 		     if (!obj && url == objUrl)
