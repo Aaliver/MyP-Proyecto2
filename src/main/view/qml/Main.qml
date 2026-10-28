@@ -67,7 +67,8 @@ ApplicationWindow {
 		id: musicButton
 		height: 70
 		iconSource: musicButton.playMusic ?
-			"qrc:img/images/pause.png" : "qrc:img/images/play.png"
+		    "qrc:img/images/pause.png" : "qrc:img/images/play.png"
+		background: null
 
 		property bool playMusic: false
 
