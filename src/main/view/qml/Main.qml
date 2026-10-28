@@ -57,29 +57,75 @@ ApplicationWindow {
             id: player
             audioOutput: musicOut
             source: ""
+
+	    function time(ms) {
+		if (ms <= 0 || isNaN(ms))
+		    return "00:00"
+		var totalSeconds = Math.floor(ms / 1000)
+		var minutes = Math.floor(totalSeconds / 60)
+		var seconds = totalSeconds % 60
+		return (minutes < 10 ? "0" : "") + minutes + ":" +
+		    (seconds < 10 ? "0" : "") + seconds
+	    }
 	}
 
-	Row {
-            anchors.centerIn: parent
-            spacing: 20
+	Item {
+	    width: window.width / 3.5
+	    height: parent.height
+            anchors.left: parent.left
+            anchors.leftMargin: 20
+            anchors.verticalCenter: parent.verticalCenter
 
-            Boton {
-		id: musicButton
-		height: 70
-		iconSource: musicButton.playMusic ?
-		    "qrc:img/images/pause.png" : "qrc:img/images/play.png"
-		background: null
-
-		property bool playMusic: false
-
-		onClicked: {
-		    playMusic = !playMusic
-		    if (playMusic)
-			player.play()
-		    else
-			player.pause()
-		}
+	    Label {
+		id: currentMusicTime
+                text: player.time(player.position)
+		anchors.left: parent.left
+                anchors.verticalCenter: parent.verticalCenter
             }
-	}
+
+	    Item {
+		anchors.left: currentMusicTime.right
+                anchors.right: totalMusicTime.left
+                anchors.leftMargin: 15
+                anchors.rightMargin: 15
+                height: 40
+                anchors.verticalCenter: parent.verticalCenter
+                Material.accent: Material.Grey
+
+                Slider {
+                    anchors.fill: parent
+                    from: 0
+                    to: player.duration
+                    value: player.position
+                    onMoved: player.position = value
+                }
+            }
+
+            Label {
+		id: totalMusicTime
+                text: player.time(player.duration)
+		anchors.right: parent.right
+                anchors.verticalCenter: parent.verticalCenter
+            }
+        }
+
+        Boton {
+	    id: musicButton
+	    height: 70
+	    anchors.centerIn: parent
+	    iconSource: musicButton.playMusic ?
+		"qrc:img/images/pause.png" : "qrc:img/images/play.png"
+	    background: null
+
+	    property bool playMusic: false
+
+	    onClicked: {
+		playMusic = !playMusic
+		if (playMusic)
+		    player.play()
+		else
+		    player.pause()
+	    }
+        }
     }
 }
