@@ -30,7 +30,7 @@ ApplicationWindow {
             height: 45
 	    anchors.left: parent.left
 	    anchors.leftMargin: 10
-	    iconSource: "qrc:img/images/edit.png"
+	    iconSource: "qrc:/img/images/edit.png"
 	    icon.color: "transparent"
 	}
 
@@ -39,7 +39,7 @@ ApplicationWindow {
             height: 45
 	    anchors.right: parent.right
 	    anchors.rightMargin: 10
-	    iconSource: "qrc:img/images/pickaxe.png"
+	    iconSource: "qrc:/img/images/pickaxe.png"
 	    icon.color: "transparent"
 	}
     }
@@ -114,7 +114,7 @@ ApplicationWindow {
 	    height: 70
 	    anchors.centerIn: parent
 	    iconSource: musicButton.playMusic ?
-		"qrc:img/images/pause.png" : "qrc:img/images/play.png"
+		"qrc:/img/images/pause.png" : "qrc:/img/images/play.png"
 	    background: null
 
 	    property bool playMusic: false
