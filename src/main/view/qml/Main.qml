@@ -49,13 +49,13 @@ ApplicationWindow {
 	height: 60
 
 	AudioOutput {
-            id: musicOut
-            volume: 1.0
+            id: musicOutput
+            volume: volumeSlider.value
 	}
 
 	MediaPlayer {
             id: player
-            audioOutput: musicOut
+            audioOutput: musicOutput
             source: ""
 
 	    function time(ms) {
@@ -127,5 +127,50 @@ ApplicationWindow {
 		    player.pause()
 	    }
         }
+
+	Item {
+	    width: window.width / 6
+	    height: parent.height
+            anchors.right: parent.right
+            anchors.rightMargin: 20
+            anchors.verticalCenter: parent.verticalCenter
+
+	    Image {
+		id: volumeIcon
+		sourceSize.height: 20
+		sourceSize.width: 20
+		anchors.left: parent.left
+		source: {
+		    if (volume === 0.0)
+			return "qrc:/img/images/volume-mute.svg";
+		    if (volume === 1.0)
+			return "qrc:/img/images/volume-high.svg";
+		    return "qrc:/img/images/volume-low.svg";
+		}
+		fillMode: Image.PreserveAspectFit
+		anchors.verticalCenter: parent.verticalCenter
+
+		property real volume: volumeSlider.value
+	    }
+
+	    Item {
+		anchors.left: volumeIcon.right
+                anchors.right: parent.right
+                anchors.leftMargin: 15
+                height: 40
+                anchors.verticalCenter: parent.verticalCenter
+                Material.accent: Material.Grey
+
+                Slider {
+		    id: volumeSlider
+                    anchors.fill: parent
+                    from: 0.0
+                    to: 1.0
+		    value: 0.75
+		    stepSize: 0.05
+		    live: true
+                }
+            }
+	}
     }
 }

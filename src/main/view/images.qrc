@@ -4,5 +4,8 @@
     <file>images/edit.png</file>
     <file>images/play.png</file>
     <file>images/pause.png</file>
+    <file>images/volume-mute.svg</file>
+    <file>images/volume-low.svg</file>
+    <file>images/volume-high.svg</file>
 </qresource>
 </RCC>
