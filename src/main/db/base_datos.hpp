@@ -23,7 +23,7 @@ public:
   /**
    * El constructor.
    */
-  BaseDeDatos(const std::string& ruta);
+  BaseDeDatos();
 
   /**
    * El destructor.
