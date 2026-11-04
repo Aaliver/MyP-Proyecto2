@@ -1,9 +1,22 @@
-db_sources = files('aplicacion.cpp', 'minero.cpp', 'rola.cpp', 'rola_dao.cpp', 'base_datos.cpp')
+db_sources = files(
+    'aplicacion.cpp',
+    'minero.cpp',
+    'rola.cpp',
+    'rola_dao.cpp',
+    'base_datos.cpp',
+)
+
+sqlite3_dep = dependency('sqlite3', required: true)
+
+dep = [
+    qt6_dep,
+    sqlite3_dep,
+]
 
 lib_db = static_library(
     'db_core',
     db_sources,
-    dependencies: qt6_dep
+    dependencies: dep,
 )
 
 executable(
@@ -12,5 +25,5 @@ executable(
     view_resources,
     link_with: lib_db,
     dependencies: qt6_dep,
-    install: true
+    install: true,
 )
