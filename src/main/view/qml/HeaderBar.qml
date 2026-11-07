@@ -15,7 +15,18 @@ ToolBar {
 	icon.color: "transparent"
     }
 
+    SearchField {
+	width: parent.width / 3
+        height: 30
+	anchors.right: mineButton.left
+	anchors.rightMargin: 10
+	anchors.verticalCenter: parent.verticalCenter
+
+	placeholderText: "Buscar..."
+    }
+
     Boton {
+	id: mineButton
 	width: 45
         height: 45
 	anchors.right: parent.right
