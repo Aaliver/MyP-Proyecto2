@@ -14,13 +14,9 @@ ApplicationWindow {
     Material.theme: Material.Dark
     Material.accent: Material.Indigo
 
-    Text {
-        anchors.centerIn: parent
-        text: ".-."
-        font.pixelSize: 24
-    }
-
     header: HeaderBar {}
+
+    Body {}
 
     footer: FooterBar {}
 }
