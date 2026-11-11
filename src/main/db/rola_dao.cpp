@@ -69,3 +69,18 @@ void RolaDao::deleteRola(int id) {
     throw std::runtime_error("Error al eliminar el registro.");
   sqlite3_finalize(stmt);
 }
+
+std::unordered_set<int> RolaDao::getRolasId() const {
+  sqlite3_stmt* stmt;
+  const char* sql = "SELECT id_rola FROM rolas;";
+  if (sqlite3_prepare_v2(conexion, sql, -1, &stmt, nullptr) != SQLITE_OK)
+    throw std::runtime_error("Error al preparar la consulta.");
+  int rc;
+  std::unordered_set<int> rolas;
+  while ((rc = sqlite3_step(stmt)) == SQLITE_ROW)
+    rolas.insert(sqlite3_column_int(stmt, 0));
+  if (rc != SQLITE_DONE)
+    throw std::runtime_error("Error al completar la consulta.");
+  sqlite3_finalize(stmt);
+  return rolas;
+}

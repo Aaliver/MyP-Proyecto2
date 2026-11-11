@@ -5,6 +5,7 @@
 #pragma once
 
 #include <sqlite3.h>
+#include <unordered_set>
 
 #include "rola.hpp"
 
@@ -51,4 +52,10 @@ public:
    * @param id el identificador de la rola a eliminar.
    */
   void deleteRola(int id);
+
+  /**
+   * Regresa un conjunto con los identificadores de las rolas de la base de datos.
+   * @return un conjunto con todos los identificadores de las rolas.
+   */
+  std::unordered_set<int> getRolasId() const;
 };
