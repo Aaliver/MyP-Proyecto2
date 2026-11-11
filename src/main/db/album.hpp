@@ -30,13 +30,13 @@ public:
    * Define el identificador del album.
    * @param id el identificador del album.
    */
-  void setAlbumId(int id);
+  void setId(int id);
 
   /**
    * Regresa el identificador del album.
    * @return el identificador del album.
    */
-  int getAlbumId() const;
+  int getId() const;
 
   /**
    * Define la ruta del album.

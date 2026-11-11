@@ -1,10 +1,10 @@
 #include "album.hpp"
 
-void Album::setAlbumId(int id) {
+void Album::setId(int id) {
   this->id = id;
 }
 
-int Album::getAlbumId() const {
+int Album::getId() const {
   return id;
 }
 
