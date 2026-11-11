@@ -7,7 +7,7 @@
 
 #include "rola.hpp"
 #include "album.hpp"
-#include "grupo.hpp"
+#include "artista.hpp"
 
 /**
  * @struct Elementos
@@ -26,7 +26,7 @@ struct Elementos {
   std::vector<Album> albumsNuevos;
 
   /**
-   * Los grupos nuevos.
+   * Los artistas nuevos.
    */
-  std::vector<Grupo> gruposNuevos;
+  std::vector<Artista> artistasNuevos;
 }
