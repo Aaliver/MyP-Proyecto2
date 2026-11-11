@@ -16,7 +16,7 @@ class BaseDeDatos {
 private:
 
   /* La conexión de la base de datos. */
-  sqlite3 *conexion;
+  sqlite3* conexion;
 
 public:
 
@@ -29,4 +29,10 @@ public:
    * El destructor.
    */
   ~BaseDeDatos();
+
+  /**
+   * Regresa la conexión de la base de datos.
+   * @return la conexión de la base de datos.
+   */
+  sqlite3* getConexion() const;
 };

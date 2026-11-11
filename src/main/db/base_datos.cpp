@@ -52,3 +52,7 @@ BaseDeDatos::BaseDeDatos() : conexion(nullptr) {
 BaseDeDatos::~BaseDeDatos() {
   sqlite3_close_v2(conexion);
 }
+
+sqlite3* BaseDeDatos::getConexion() const {
+  return conexion;
+}
