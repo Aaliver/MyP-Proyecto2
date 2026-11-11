@@ -54,8 +54,8 @@ public:
   void deleteRola(int id);
 
   /**
-   * Regresa un conjunto con los identificadores de las rolas de la base de datos.
-   * @return un conjunto con todos los identificadores de las rolas.
+   * Regresa un conjunto con las rutas de las rolas de la base de datos.
+   * @return un conjunto con las rutas de todas las rolas.
    */
-  std::unordered_set<int> getRolasId() const;
+  std::unordered_set<std::string> getRolasPath() const;
 };

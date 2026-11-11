@@ -70,15 +70,15 @@ void RolaDao::deleteRola(int id) {
   sqlite3_finalize(stmt);
 }
 
-std::unordered_set<int> RolaDao::getRolasId() const {
+std::unordered_set<std::string> RolaDao::getRolasPath() const {
   sqlite3_stmt* stmt;
-  const char* sql = "SELECT id_rola FROM rolas;";
+  const char* sql = "SELECT path FROM rolas;";
   if (sqlite3_prepare_v2(conexion, sql, -1, &stmt, nullptr) != SQLITE_OK)
     throw std::runtime_error("Error al preparar la consulta.");
   int rc;
-  std::unordered_set<int> rolas;
+  std::unordered_set<std::string> rolas;
   while ((rc = sqlite3_step(stmt)) == SQLITE_ROW)
-    rolas.insert(sqlite3_column_int(stmt, 0));
+    rolas.insert(std::string(reinterpret_cast<const char*>(sqlite3_column_text(stmt, 0))));
   if (rc != SQLITE_DONE)
     throw std::runtime_error("Error al completar la consulta.");
   sqlite3_finalize(stmt);
