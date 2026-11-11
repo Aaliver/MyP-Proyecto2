@@ -3,6 +3,7 @@ db_sources = files(
     'minero.cpp',
     'rola.cpp',
     'rola_dao.cpp',
+    'album.cpp',
     'base_datos.cpp',
 )
 
