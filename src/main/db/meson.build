@@ -4,6 +4,7 @@ db_sources = files(
     'rola.cpp',
     'rola_dao.cpp',
     'album.cpp',
+    'artista.cpp',
     'base_datos.cpp',
 )
 
