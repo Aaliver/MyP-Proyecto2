@@ -6,10 +6,13 @@ db_sources = files(
     'base_datos.cpp',
 )
 
+taglib_dep = dependency('taglib', required: true)
+
 sqlite3_dep = dependency('sqlite3', required: true)
 
 dep = [
     qt6_dep,
+    taglib_dep,
     sqlite3_dep,
 ]
 
