@@ -5,33 +5,68 @@
 #include <fileref.h>
 #include <tag.h>
 
+#include "album.hpp"
+#include "artista.hpp"
 #include "rola.hpp"
 
 namespace fs = std::filesystem;
 
-std::vector<Rola> Minero::mina(std::filesystem::path ruta, RolaDao dao) {
-  std::unordered_set<std::string> rolas = dao.getRolasPath();
-  std::vector<Rola> rolasNuevas;
-  for (const auto& entrada : fs::recursive_directory_iterator(ruta))
-    if (entrada.is_regular_file() && entrada.path().extension() == ".mp3") {
-      std::string ruta = entrada.path();
-      if (rolas.find(ruta) == rolas.end())
-	rolasNuevas.push_back(obtenerRola(ruta));
-    }
-  return rolasNuevas;
+namespace {
+  constexpr bool utf8 = true;
+
+  void nuevaRola(TagLib::FileRef& file, std::string& ruta, std::vector<Rola>& rolas) {
+    Rola rola;
+    rola.setPath(ruta);
+    rola.setTitle(file.tag()->title().to8Bit(utf8));
+    rola.setTrack(file.tag()->track());
+    rola.setYear(file.tag()->year());
+    rola.setGenre(file.tag()->genre().to8Bit(utf8));
+    rolas.push_back(rola);
+  }
+
+  void nuevoAlbum(TagLib::FileRef& file, std::string& directorio,
+		  std::vector<Album>& albums) {
+    Album album;
+    album.setPath(directorio);
+    album.setName(file.tag()->album().to8Bit(utf8));
+    album.setYear(file.tag()->year());
+    albums.push_back(album);
+  }
+
+  void nuevoArtista(std::string& name, std::vector<Artista>& artistas) {
+    Artista artista;
+    artista.setIdType(2);
+    artista.setName(name);
+    artistas.push_back(artista);
+  }
+
+  void nuevoElemento(std::string ruta, std::string directorio, Elementos& elementos,
+		     std::unordered_set<std::string>& albums,
+		     std::unordered_set<std::string>& artistas) {
+    TagLib::FileRef file(ruta.c_str());
+    if (file.isNull() || file.tag() == nullptr)
+      return;
+    nuevaRola(file, ruta, elementos.rolasNuevas);
+    if (albums.insert(directorio).second)
+      nuevoAlbum(file, directorio, elementos.albumsNuevos);
+    std::string artistName = file.tag()->artist().to8Bit(utf8);
+    if (artistas.insert(artistName).second)
+      nuevoArtista(artistName, elementos.artistasNuevos);
+  }
 }
 
-Rola Minero::obtenerRola(std::string ruta) {
-  TagLib::FileRef f(ruta.c_str());
-  bool utf8 = true;
-  Rola rola;
-  //rola.setRolaId(f.tag()->);
-  //rola.setArtistId(f.tag()->artist());
-  //rola.setAlbumId(f.tag()->album());
-  rola.setPath(ruta);
-  rola.setTitle(f.tag()->title().to8Bit(utf8));
-  rola.setTrack(f.tag()->track());
-  rola.setYear(f.tag()->year());
-  rola.setGenre(f.tag()->genre().to8Bit(utf8));
-  return rola;
+Elementos Minero::mina(std::filesystem::path ruta, const RolaDao& rolaDao,
+		       const AlbumDao& albumDao, const ArtistaDao& artistaDao) {
+  Elementos elementos;
+  std::unordered_set<std::string> rolas = rolaDao.getRolasPath();
+  std::unordered_set<std::string> albums = albumDao.getAlbumsPath();
+  std::unordered_set<std::string> artistas = artistaDao.getArtistasNames();
+  for (const auto& entrada : fs::recursive_directory_iterator(ruta))
+    if (entrada.is_regular_file() && entrada.path().extension() == ".mp3") {
+      std::string ruta = entrada.path().string();
+      std::string directorio = entrada.path().parent_path().string();
+      if (rolas.find(ruta) == rolas.end())
+	nuevoElemento(ruta, directorio, elementos, albums, artistas);
+    }
+  return elementos;
 }

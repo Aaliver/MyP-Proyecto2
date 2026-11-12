@@ -7,8 +7,10 @@
 
 #include <filesystem>
 #include <string>
-#include <vector>
 
+#include "elementos.hpp"
+#include "album_dao.hpp"
+#include "artista_dao.hpp"
 #include "rola_dao.hpp"
 
 /**
@@ -20,18 +22,16 @@
 namespace Minero {
 
   /**
-   * @brief Regresa un vector con las rolas que no forman parte de la base de datos.
-   * @param ruta la ruta del directorio del que obtener los rolas.
-   * @param dao el dao del que obtener las rolas que ya pertenecen a la base de
+   * @brief Regresa los elementos que no forman parte de la base de datos.
+   * @param ruta la ruta del directorio del que obtener los elementos.
+   * @param rolaDao el dao del que obtener las rolas que ya pertenecen a la base de
    *        datos.
-   * @return un vector con las rolas que no forman parte de la base de datos.
+   * @param albumDao el dao del que obtener los albums que ya pertenecen a la base de
+   *        datos.
+   * @param artistaDao el dao del que obtener los artistas que ya pertenecen a la base
+   *        de datos.
+   * @return los elementos que no forman parte de la base de datos.
    */
-  std::vector<Rola> mina(std::filesystem::path ruta, RolaDao dao);
-
-  /**
-   * @brief Regresa una rola con la información de un .mp3.
-   * @param ruta la ruta del mp3 del que obtener la información.
-   * @return una rola con la información de un .mp3.
-   */
-  Rola obtenerRola(std::string ruta);
+  Elementos mina(std::filesystem::path ruta, const RolaDao& rolaDao,
+		 const AlbumDao& albumDao, const ArtistaDao& artistaDao);
 };

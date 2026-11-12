@@ -5,6 +5,8 @@
 
 #pragma once
 
+#include <vector>
+
 #include "rola.hpp"
 #include "album.hpp"
 #include "artista.hpp"
@@ -29,4 +31,4 @@ struct Elementos {
    * Los artistas nuevos.
    */
   std::vector<Artista> artistasNuevos;
-}
+};
