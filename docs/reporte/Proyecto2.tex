@@ -147,9 +147,9 @@ garantizar la existencia de un único controlador para la base de datos.
 \section{Problema}
 
 Esencialmente, el desarrollo de este proyecto se reduce a los siguientes 4
-problemas:
+componentes principales:
 
-\begin{enumerate}
+\begin{itemize}
   \item {\color{maincolor}\textbf{El Minero}}\\
     Se encarga de recorrer el directorio de entrada para identificar y leer los
     datos de los archivos .mp3 que este contiene.
@@ -160,11 +160,47 @@ problemas:
     archivos .mp3.
   \item {\color{maincolor}\textbf{El Mini Compilador}}\\
     Un intérprete de comandos capaz de permitir búsquedas avanzadas.
-\end{enumerate}
+\end{itemize}
 
 \section{Análisis}
 
+\subsection{El Minero}
 
+Recorre un directorio arbitrario para identificar y leer los datos de los
+archivos .mp3 que este contiene.
+
+Para lograr esto primero se obtiene toda la información que ya se tiene
+localmente en \texttt{base\_datos.db} (es decir, las rolas, los álbumes y los
+artistas) y se agrega la nueva información del directorio sin repetirla.
+
+\subsection{La Interfaz}
+
+La vista, capaz de mostrar la información de la base de datos y modificarla sin
+alterar los archivos originales.
+
+Cuenta con botones para minar el directorio, editar y reproducir una canción,
+así como deslizadores para cambiar el volumen y la posición de la canción.
+
+Para filtrar existe una barra de búsqueda junto a la vista principal: una tabla
+que muestra todas las rolas en la base de datos..
+
+\subsection{La Base de Datos}
+
+El motor que se encarga de guardar toda la información extraída de los .mp3 en
+el archivo \texttt{base\_datos.db}. Esta se puede modificar de acuerdo a los cambios
+realizados por el usuario desde la interfaz.
+
+Para crearla y modificarla nos apoyamos de objetos que representaran a las
+rolas, los álbumes y los artistas, así como de sus respectivos DAOs para obtener
+y modificar la información de la base de datos.
+
+\subsection{El Mini Compilador}
+
+Un pequeño intérprete de comandos capaz de permitir búsquedas en la base de
+datos sin que el usuario escriba SQL.
+
+Es capaz de realizar búsquedas básicas por las propiedades de las rolas, los
+álbumes o los artistas.
 
 \section{Diseño}
 
