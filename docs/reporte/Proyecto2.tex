@@ -208,7 +208,30 @@ Es capaz de realizar búsquedas básicas por las propiedades de las rolas, los
 
 \section{Implementación}
 
+Para la implementación de este proyecto se usó Meson (con Ninja) como sistema de
+construcción, creando varios archivos \texttt{meson.build}, uno en cada
+directorio principal para gestionar los archivos, las dependencias y los
+recursos.
 
+Entre las dependencias se encuentran Qt6 y SQLite3, esenciales para la
+compilación y ejecución del programa. Asimismo, se usó Doxygen para generar la
+documentación, pero se puede prescindir de esta herramienta sin que el
+funcionamiento del programa se vea afectado.
+
+Primero, compilamos:
+
+\begin{center}
+    {\texttt{meson setup build \\
+            meson compile -C build}}
+\end{center}
+
+Luego, para correr el programa:
+
+\vspace{1.2em}
+\centerline{\texttt{./build/src/main/db/musical-db ruta/archivos/mp3}}
+\vspace{1.2em}
+
+Donde \texttt{ruta/archivos/mp3} es el directorio que el programa minará.
 
 \section{Conclusión}
 
