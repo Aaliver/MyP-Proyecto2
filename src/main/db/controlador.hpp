@@ -4,8 +4,14 @@
  */
 #pragma once
 
-#include <QObject>
 #include <filesystem>
+
+#include <QObject>
+
+#include "album_dao.hpp"
+#include "artista_dao.hpp"
+#include "base_datos.hpp"
+#include "rola_dao.hpp"
 
 /**
  * @class Controlador
@@ -19,6 +25,14 @@ private:
 
   /* La ruta del directorio a minar. */
   std::filesystem::path ruta;
+  /* La base de datos. */
+  BaseDeDatos db;
+  /* El dao de las rolas. */
+  RolaDao rolaDao;
+  /* El dao de los albumés. */
+  AlbumDao albumDao;
+  /* El dao de los artistas. */
+  ArtistaDao artistaDao;
 
 public:
 
