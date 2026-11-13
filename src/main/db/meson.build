@@ -12,20 +12,19 @@ db_sources = files(
     'controlador.cpp',
 )
 
+moc_sources = import_qt6.preprocess(
+    moc_headers: ['controlador.hpp'],
+)
+
 taglib_dep = dependency('taglib', required: true)
 
 sqlite3_dep = dependency('sqlite3', required: true)
 
-dep = [
-    qt6_dep,
-    taglib_dep,
-    sqlite3_dep,
-]
-
 lib_db = static_library(
     'db_core',
     db_sources,
-    dependencies: dep,
+    moc_sources,
+    dependencies: [qt6_dep, taglib_dep, sqlite3_dep],
 )
 
 executable(

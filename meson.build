@@ -10,6 +10,8 @@ qt6_dep = dependency(
     required: true,
 )
 
+import_qt6 = import('qt6')
+
 subdir('src/main/view')
 subdir('src/main/db')
 
