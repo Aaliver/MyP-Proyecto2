@@ -61,12 +61,16 @@ Elementos Minero::mina(std::filesystem::path ruta, const RolaDao& rolaDao,
   std::unordered_set<std::string> rolas = rolaDao.getRolasPath();
   std::unordered_set<std::string> albums = albumDao.getAlbumsPath();
   std::unordered_set<std::string> artistas = artistaDao.getArtistasNames();
-  for (const auto& entrada : fs::recursive_directory_iterator(ruta))
-    if (entrada.is_regular_file() && entrada.path().extension() == ".mp3") {
-      std::string ruta = entrada.path().string();
-      std::string directorio = entrada.path().parent_path().string();
-      if (rolas.find(ruta) == rolas.end())
-	nuevoElemento(ruta, directorio, elementos, albums, artistas);
-    }
+
+  try {
+    for (const auto& entrada : fs::recursive_directory_iterator(ruta, fs::directory_options::skip_permission_denied))
+      if (entrada.is_regular_file() && entrada.path().extension() == ".mp3") {
+	std::string ruta = entrada.path().string();
+	std::string directorio = entrada.path().parent_path().string();
+	if (rolas.find(ruta) == rolas.end())
+	  nuevoElemento(ruta, directorio, elementos, albums, artistas);
+      }
+  } catch (const std::filesystem::filesystem_error& fse) {}
+
   return elementos;
 }

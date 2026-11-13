@@ -33,5 +33,6 @@ ToolBar {
 	anchors.rightMargin: 10
 	iconSource: "qrc:/img/images/pickaxe.png"
 	icon.color: "transparent"
+	onClicked: controlador.minar()
     }
 }

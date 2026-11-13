@@ -2,6 +2,7 @@
 
 #include <QCoreApplication>
 #include <QGuiApplication>
+#include <QQmlContext>
 
 namespace fs = std::filesystem;
 
@@ -29,6 +30,7 @@ int Aplicacion::ejecuta() {
 		     if (!obj && url == objUrl)
 		       QCoreApplication::exit(-1);
 		   }, Qt::QueuedConnection);
+  engine.rootContext()->setContextProperty("controlador", &controlador);
   engine.load(url);
   return qApp->exec();
 }

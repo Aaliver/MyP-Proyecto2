@@ -8,6 +8,7 @@
 
 #include <QObject>
 #include <QVariantList>
+#include <QVariantMap>
 
 #include "album_dao.hpp"
 #include "artista_dao.hpp"

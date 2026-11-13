@@ -17,6 +17,7 @@ Page {
 
 	syncView: rolasView
 	clip: true
+	model: ["Titulo", "Año", "Género"]
 
 	delegate: Rectangle {
 	    implicitWidth: 150
@@ -24,7 +25,7 @@ Page {
             color: palette.mid
 
 	    Text {
-		text: display
+		text: modelData
 		color: palette.text
 		font.bold: true
 		anchors.left: parent.left
@@ -46,6 +47,15 @@ Page {
 	clip: true
 	interactive: true
 
+	columnWidthProvider: function(column) {
+	    switch (column) {
+            case 0: return width * 0.50
+            case 1: return width * 0.15
+            case 2: return width * 0.35
+            default: return 100
+	    }
+	}
+
 	selectionBehavior: TableView.SelectRows
 	selectionMode: TableView.SingleSelection
 	selectionModel: ItemSelectionModel {
@@ -62,14 +72,11 @@ Page {
 	}
 
 	model: TableModel {
-	    TableModelColumn { display: "name" }
-	    TableModelColumn { display: "color" }
+	    TableModelColumn { display: "title" }
+	    TableModelColumn { display: "year" }
+	    TableModelColumn { display: "genre" }
 
-            rows: [
-		{ "name": "cat", "color": "black" },
-		{ "name": "dog", "color": "brown" },
-		{ "name": "bird", "color": "white" }
-            ]
+            rows: Array.from(controlador.rolas)
 	}
 
 	delegate: Rectangle {
