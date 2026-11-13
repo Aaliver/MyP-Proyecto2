@@ -72,6 +72,31 @@ void RolaDao::deleteRola(int id) {
   sqlite3_finalize(stmt);
 }
 
+std::vector<Rola> RolaDao::getRolas() const {
+  sqlite3_stmt* stmt;
+  const char* sql = "SELECT * FROM rolas;";
+  if (sqlite3_prepare_v2(conexion, sql, -1, &stmt, nullptr) != SQLITE_OK)
+    throw std::runtime_error("Error al preparar la consulta.");
+  int rc;
+  std::vector<Rola> rolas;
+  while ((rc = sqlite3_step(stmt)) == SQLITE_ROW) {
+    Rola rola;
+    rola.setRolaId(sqlite3_column_int(stmt, 0));
+    rola.setArtistId(sqlite3_column_int(stmt, 1));
+    rola.setAlbumId(sqlite3_column_int(stmt, 2));
+    rola.setPath(DaoUtils::castString(stmt, 3));
+    rola.setTitle(DaoUtils::castString(stmt, 4));
+    rola.setTrack(sqlite3_column_int(stmt, 5));
+    rola.setYear(sqlite3_column_int(stmt, 6));
+    rola.setGenre(DaoUtils::castString(stmt, 7));
+    rolas.push_back(rola);
+  }
+  if (rc != SQLITE_DONE)
+    DaoUtils::sqliteError(stmt, "Error al completar la consulta.");
+  sqlite3_finalize(stmt);
+  return rolas;
+}
+
 std::unordered_set<std::string> RolaDao::getRolasPath() const {
   sqlite3_stmt* stmt;
   const char* sql = "SELECT path FROM rolas;";

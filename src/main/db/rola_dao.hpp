@@ -6,6 +6,7 @@
 
 #include <sqlite3.h>
 #include <unordered_set>
+#include <vector>
 
 #include "rola.hpp"
 
@@ -52,6 +53,12 @@ public:
    * @param id el identificador de la rola a eliminar.
    */
   void deleteRola(int id);
+
+  /**
+   * @brief Regresa un vector con las rolas de la base de datos.
+   * @return un vector con todas las rolas.
+   */
+  std::vector<Rola> getRolas() const;
 
   /**
    * @brief Regresa un conjunto con las rutas de las rolas de la base de datos.
