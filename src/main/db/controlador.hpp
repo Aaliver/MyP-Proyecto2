@@ -7,6 +7,7 @@
 #include <filesystem>
 
 #include <QObject>
+#include <QVariantList>
 
 #include "album_dao.hpp"
 #include "artista_dao.hpp"
@@ -20,6 +21,7 @@
  */
 class Controlador : public QObject {
   Q_OBJECT
+  Q_PROPERTY(QVariantList rolas READ getRolas NOTIFY rolasChanged)
 
 private:
 
@@ -34,6 +36,12 @@ private:
   /* El dao de los artistas. */
   ArtistaDao artistaDao;
 
+  /* Las rolas de la base de datos. */
+  QVariantList rolas;
+
+  /* Actualiza las rolas. */
+  void actualizaRolas();
+
 public:
 
   /**
@@ -45,4 +53,16 @@ public:
    * @brief Mina el directorio y muestra los resultados.
    */
   Q_INVOKABLE void minar();
+
+  /**
+   * @brief Regresa las rolas de la base de datos.
+   */
+  QVariantList getRolas() const;
+
+signals:
+
+  /**
+   * @brief Notifica que las rolas cambiaron.
+   */
+  void rolasChanged();
 };
