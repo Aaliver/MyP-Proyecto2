@@ -6,7 +6,7 @@ project(
 
 qt6_dep = dependency(
     'qt6',
-    modules: ['Core', 'Gui', 'Qml', 'Quick'],
+    modules: ['Core', 'Gui', 'Qml', 'Quick', 'Concurrent'],
     required: true,
 )
 

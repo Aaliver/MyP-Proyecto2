@@ -9,6 +9,7 @@ db_sources = files(
     'artista_dao.cpp',
     'dao_utils.cpp',
     'base_datos.cpp',
+    'controlador.cpp',
 )
 
 taglib_dep = dependency('taglib', required: true)
