@@ -2,13 +2,14 @@
  * @file aplicacion.hpp
  * @brief Definición de la aplicación.
  */
-
 #pragma once
 
 #include <filesystem>
 #include <string>
 
 #include <QQmlApplicationEngine>
+
+#include "controlador.hpp"
 
 /**
  * @class Aplicacion
@@ -18,10 +19,23 @@
  */
 class Aplicacion {
 
+private:
+
+  /* El motor. */
+  QQmlApplicationEngine engine;
+  /* El controlador. */
+  Controlador controlador;
+
+  /* Verifica que las entradas sean válidas. */
+  std::filesystem::path valida(int argc, char* argv[]);
+
+  /* Verifica que la ruta sea válida. */
+  std::filesystem::path validaRuta(std::string ruta);
+
 public:
 
   /**
-   * El constructor.
+   * @brief El constructor.
    * @param argc la cantidad de entradas.
    * @param argv el arreglo con las entradas.
    */
@@ -31,17 +45,4 @@ public:
    * @brief Ejecuta la aplicación.
    */
   int ejecuta();
-
-private:
-
-  /* La ruta de entrada. */
-  std::filesystem::path ruta;
-  /* El motor. */
-  QQmlApplicationEngine engine;
-
-  /* Verifica que las entradas sean válidas. */
-  void valida(int argc, char* argv[]);
-
-  /* Verifica que la ruta sea válida. */
-  void validaRuta(std::string ruta);
 };
