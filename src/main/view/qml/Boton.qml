@@ -23,12 +23,17 @@ Button {
 	}
 
 	Image {
+	    readonly property bool isSvg:
+	    source.toString().toLowerCase().endsWith(".svg")
+
             visible: button.iconSource != ""
             source: button.iconSource
             fillMode: Image.PreserveAspectFit
             anchors.centerIn: parent
-            width: parent.height * 0.6
-            height: parent.height * 0.6
+            width: parent.width * (isSvg ? 0.4 : 0.6)
+            height: parent.height * (isSvg ? 0.4 : 0.6)
+	    sourceSize.width: isSvg ? width : 0
+	    sourceSize.height: isSvg ? height : 0
         }
     }
 }
