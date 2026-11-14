@@ -21,10 +21,10 @@ class Aplicacion {
 
 private:
 
-  /* El motor. */
-  QQmlApplicationEngine engine;
   /* El controlador. */
   Controlador controlador;
+  /* El motor. */
+  QQmlApplicationEngine engine;
 
   /* Verifica que las entradas sean válidas. */
   std::filesystem::path valida(int argc, char* argv[]);

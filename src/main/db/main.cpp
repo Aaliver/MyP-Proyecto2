@@ -17,5 +17,7 @@ int main(int argc, char* argv[]) {
     return aplicacion.ejecuta();
   } catch (const std::invalid_argument& ia) {
     return error(ia.what());
+  } catch (const std::runtime_error& re) {
+    return error(re.what());
   }
 }
