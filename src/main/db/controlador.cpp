@@ -10,8 +10,7 @@ Q_INVOKABLE void Controlador::minar() {
   Elementos elementos = Minero::mina(ruta, rolaDao, albumDao, artistaDao);
   artistaDao.addArtistas(elementos.artistasNuevos);
   albumDao.addAlbums(elementos.albumsNuevos);
-  for (const auto& rola: elementos.rolasNuevas)
-    rolaDao.addRola(rola);
+  rolaDao.addRolas(elementos.rolasNuevas);
   actualizaRolas();
 }
 

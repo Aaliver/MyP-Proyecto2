@@ -4,21 +4,24 @@
 
 RolaDao::RolaDao(sqlite3* conexion) : conexion(conexion) {}
 
-void RolaDao::addRola(const Rola& rola) {
+void RolaDao::addRolas(const std::vector<Rola>& rolas) {
   sqlite3_stmt* stmt;
-  const char* sql = "INSERT INTO rolas (id_rola, id_performer, id_album, path, title, track, year, genre) VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
+  const char* sql = "INSERT INTO rolas (id_performer, id_album, path, title, track, year, genre) VALUES (?, ?, ?, ?, ?, ?, ?);";
   if (sqlite3_prepare_v2(conexion, sql, -1, &stmt, nullptr) != SQLITE_OK)
     throw std::runtime_error("Error al preparar la consulta.");
-  sqlite3_bind_int(stmt, 1, rola.getRolaId());
-  sqlite3_bind_int(stmt, 2, rola.getArtistId());
-  sqlite3_bind_int(stmt, 3, rola.getAlbumId());
-  sqlite3_bind_text(stmt, 4, rola.getPath().c_str(), -1, SQLITE_TRANSIENT);
-  sqlite3_bind_text(stmt, 5, rola.getTitle().c_str(), -1, SQLITE_TRANSIENT);
-  sqlite3_bind_int(stmt, 6, rola.getTrack());
-  sqlite3_bind_int(stmt, 7, rola.getYear());
-  sqlite3_bind_text(stmt, 8, rola.getGenre().c_str(), -1, SQLITE_TRANSIENT);
-  if (sqlite3_step(stmt) != SQLITE_DONE)
-    DaoUtils::sqliteError(stmt, "Error al añadir el registro.");
+  for (const auto& rola: rolas) {
+    sqlite3_bind_int(stmt, 1, rola.getArtistId());
+    sqlite3_bind_int(stmt, 2, rola.getAlbumId());
+    sqlite3_bind_text(stmt, 3, rola.getPath().c_str(), -1, SQLITE_TRANSIENT);
+    sqlite3_bind_text(stmt, 4, rola.getTitle().c_str(), -1, SQLITE_TRANSIENT);
+    sqlite3_bind_int(stmt, 5, rola.getTrack());
+    sqlite3_bind_int(stmt, 6, rola.getYear());
+    sqlite3_bind_text(stmt, 7, rola.getGenre().c_str(), -1, SQLITE_TRANSIENT);
+    if (sqlite3_step(stmt) != SQLITE_DONE)
+      DaoUtils::sqliteError(stmt, "Error al añadir el registro.");
+    sqlite3_reset(stmt);
+    sqlite3_clear_bindings(stmt);
+  }
   sqlite3_finalize(stmt);
 }
 

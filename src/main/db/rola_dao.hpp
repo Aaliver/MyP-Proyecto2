@@ -30,10 +30,10 @@ public:
   explicit RolaDao(sqlite3* conexion);
 
   /**
-   * @brief Añade una rola a la base de datos.
-   * @param rola la rola a añadir.
+   * @brief Añade rolas a la base de datos.
+   * @param rolas el vector con las rolas a añadir.
    */
-  void addRola(const Rola& rola);
+  void addRolas(const std::vector<Rola>& rolas);
 
   /**
    * @brief Regresa una rola de la base de datos.
