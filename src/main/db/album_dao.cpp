@@ -4,16 +4,20 @@
 
 AlbumDao::AlbumDao(sqlite3* conexion) : conexion(conexion) {}
 
-void AlbumDao::addAlbum(const Album& album) {
+void AlbumDao::addAlbums(const std::vector<Album>& albums) {
   sqlite3_stmt* stmt;
   const char* sql = "INSERT INTO albums (path, name, year) VALUES (?, ?, ?);";
   if (sqlite3_prepare_v2(conexion, sql, -1, &stmt, nullptr) != SQLITE_OK)
     throw std::runtime_error("Error al preparar la consulta.");
-  sqlite3_bind_text(stmt, 1, album.getPath().c_str(), -1, SQLITE_TRANSIENT);
-  sqlite3_bind_text(stmt, 2, album.getName().c_str(), -1, SQLITE_TRANSIENT);
-  sqlite3_bind_int(stmt, 3, album.getYear());
-  if (sqlite3_step(stmt) != SQLITE_DONE)
-    DaoUtils::sqliteError(stmt, "Error al añadir el registro.");
+  for (const auto& album: albums) {
+    sqlite3_bind_text(stmt, 1, album.getPath().c_str(), -1, SQLITE_TRANSIENT);
+    sqlite3_bind_text(stmt, 2, album.getName().c_str(), -1, SQLITE_TRANSIENT);
+    sqlite3_bind_int(stmt, 3, album.getYear());
+    if (sqlite3_step(stmt) != SQLITE_DONE)
+      DaoUtils::sqliteError(stmt, "Error al añadir el registro.");
+    sqlite3_reset(stmt);
+    sqlite3_clear_bindings(stmt);
+  }
   sqlite3_finalize(stmt);
 }
 

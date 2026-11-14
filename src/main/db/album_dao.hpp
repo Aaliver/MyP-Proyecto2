@@ -29,10 +29,10 @@ public:
   explicit AlbumDao(sqlite3* conexion);
 
   /**
-   * @brief Añade un album a la base de datos.
-   * @param album el album a añadir.
+   * @brief Añade albums a la base de datos.
+   * @param albums los albums a añadir.
    */
-  void addAlbum(const Album& album);
+  void addAlbums(const std::vector<Album>& albums);
 
   /**
    * @brief Regresa un album de la base de datos.

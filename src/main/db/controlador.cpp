@@ -9,8 +9,7 @@ Controlador::Controlador(std::filesystem::path ruta, QObject* parent) :
 Q_INVOKABLE void Controlador::minar() {
   Elementos elementos = Minero::mina(ruta, rolaDao, albumDao, artistaDao);
   artistaDao.addArtistas(elementos.artistasNuevos);
-  for (const auto& album: elementos.albumsNuevos)
-    albumDao.addAlbum(album);
+  albumDao.addAlbums(elementos.albumsNuevos);
   for (const auto& rola: elementos.rolasNuevas)
     rolaDao.addRola(rola);
   actualizaRolas();
