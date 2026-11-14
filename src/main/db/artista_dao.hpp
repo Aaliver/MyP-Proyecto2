@@ -6,6 +6,7 @@
 
 #include <sqlite3.h>
 #include <unordered_set>
+#include <vector>
 
 #include "artista.hpp"
 
@@ -29,10 +30,10 @@ public:
   explicit ArtistaDao(sqlite3* conexion);
 
   /**
-   * @brief Añade un artista a la base de datos.
-   * @param artista el artista a añadir.
+   * @brief Añade artistas a la base de datos.
+   * @param artistas el vector con los artistas a añadir.
    */
-  void addArtista(const Artista& artista);
+  void addArtistas(const std::vector<Artista>& artistas);
 
   /**
    * @brief Regresa un artista de la base de datos.

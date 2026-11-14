@@ -4,15 +4,19 @@
 
 ArtistaDao::ArtistaDao(sqlite3* conexion) : conexion(conexion) {}
 
-void ArtistaDao::addArtista(const Artista& artista) {
+void ArtistaDao::addArtistas(const std::vector<Artista>& artistas) {
   sqlite3_stmt* stmt;
   const char* sql = "INSERT INTO performers (id_type, name) VALUES (?, ?);";
   if (sqlite3_prepare_v2(conexion, sql, -1, &stmt, nullptr) != SQLITE_OK)
     throw std::runtime_error("Error al preparar la consulta.");
-  sqlite3_bind_int(stmt, 1, artista.getIdType());
-  sqlite3_bind_text(stmt, 2, artista.getName().c_str(), -1, SQLITE_TRANSIENT);
-  if (sqlite3_step(stmt) != SQLITE_DONE)
-    DaoUtils::sqliteError(stmt, "Error al añadir el registro.");
+  for (const auto& artista: artistas) {
+    sqlite3_bind_int(stmt, 1, artista.getIdType());
+    sqlite3_bind_text(stmt, 2, artista.getName().c_str(), -1, SQLITE_TRANSIENT);
+    if (sqlite3_step(stmt) != SQLITE_DONE)
+      DaoUtils::sqliteError(stmt, "Error al añadir el artista.");
+    sqlite3_reset(stmt);
+    sqlite3_clear_bindings(stmt);
+  }
   sqlite3_finalize(stmt);
 }
 
