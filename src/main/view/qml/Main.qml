@@ -8,7 +8,7 @@ ApplicationWindow {
     visibility: "Maximized"
     width: 1000
     height: 700
-
+    palette.text: "lavender"
     title: "Base de Datos Musical"
 
     Material.theme: Material.Dark

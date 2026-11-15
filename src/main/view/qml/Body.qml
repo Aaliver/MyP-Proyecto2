@@ -6,7 +6,6 @@ import QtQuick.Controls.Material
 Page {
     anchors.fill: parent
     anchors.margins: 10
-    palette.text: "lavender"
 
     HorizontalHeaderView {
 	id: rolasViewHeader
