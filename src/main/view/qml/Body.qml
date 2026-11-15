@@ -7,6 +7,9 @@ Page {
     anchors.fill: parent
     anchors.margins: 10
 
+    property var dataRow: rolasView.currentRow >= 0
+        ? controlador.rolas[rolasView.currentRow] : null
+
     HorizontalHeaderView {
 	id: rolasViewHeader
 	height: 40

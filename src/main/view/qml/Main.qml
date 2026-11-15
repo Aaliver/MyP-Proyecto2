@@ -14,9 +14,11 @@ ApplicationWindow {
     Material.theme: Material.Dark
     Material.accent: Material.Indigo
 
-    header: HeaderBar {}
+    header: HeaderBar {
+	selectedData: body.dataRow
+    }
 
-    Body {}
+    Body { id: body }
 
     footer: FooterBar {}
 }
