@@ -1,5 +1,7 @@
 #include "controlador.hpp"
 
+#include <QUrl>
+
 #include "minero.hpp"
 
 Controlador::Controlador(std::filesystem::path ruta, QObject* parent) :
@@ -21,7 +23,7 @@ void Controlador::actualizaRolas() {
         fila["id_rola"] = rola.getRolaId();
         fila["id_performer"] = rola.getArtistId();
         fila["id_album"] = rola.getAlbumId();
-        fila["path"] = QString::fromStdString(rola.getPath());
+        fila["path"] = QUrl::fromLocalFile(QString::fromStdString(rola.getPath()));
         fila["title"] = QString::fromStdString(rola.getTitle());
         fila["track"] = rola.getTrack();
         fila["year"] = rola.getYear();

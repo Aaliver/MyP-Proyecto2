@@ -7,6 +7,8 @@ ToolBar {
     id: footerBar
     height: 60
 
+    property var selectedRola: null
+
     AudioOutput {
 	id: musicOutput
 	volume: volumeSlider.value
@@ -15,7 +17,7 @@ ToolBar {
     MediaPlayer {
 	id: player
 	audioOutput: musicOutput
-	source: ""
+	source: selectedRola !== null ? selectedRola["path"] : ""
 
 	function time(ms) {
 	    if (ms <= 0 || isNaN(ms))
@@ -72,18 +74,15 @@ ToolBar {
 	id: musicButton
 	height: 70
 	anchors.centerIn: parent
-	iconSource: musicButton.playMusic ?
+	iconSource: player.playing ?
 	    "qrc:/img/images/pause.png" : "qrc:/img/images/play.png"
 	background: null
 
-	property bool playMusic: false
-
 	onClicked: {
-	    playMusic = !playMusic
-	    if (playMusic)
-		player.play()
-	    else
+	    if (player.playing)
 		player.pause()
+	    else
+		player.play()
 	}
     }
 

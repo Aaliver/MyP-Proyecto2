@@ -20,5 +20,7 @@ ApplicationWindow {
 
     Body { id: body }
 
-    footer: FooterBar {}
+    footer: FooterBar {
+	selectedRola: body.dataRow
+    }
 }
