@@ -17,7 +17,7 @@ ToolBar {
 	icon.color: "transparent"
 	onClicked: {
 	    if (headerBar.selectedData != null) {
-		editRola.data = headerBar.selectedData
+		editRola.editData = headerBar.selectedData
 		editRola.open()
 	    }
 	}

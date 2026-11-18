@@ -1,5 +1,4 @@
 import QtQuick
-import QtQuick.Controls
 import QtQuick.Controls.Material
 import QtQuick.Layouts
 
@@ -12,52 +11,88 @@ Dialog {
     anchors.centerIn: Overlay.overlay
     standardButtons: Dialog.Save | Dialog.Cancel
 
-    property var data: null
+    property var editData: null
     property var fields: []
 
-    ListView {
-	id: dataView
+    Loader {
 	anchors.fill: parent
-	spacing: 5
-	clip: true
+	active: editDialog.visible
+	sourceComponent: component
+    }
 
-	model: editDialog.fields
+    Component {
+	id: component
+	ListView {
+	    id: dataView
+	    anchors.fill: parent
+	    spacing: 5
+	    clip: true
 
-	delegate: Rectangle {
-            height: 45
-	    width: parent.width
-            color: palette.midlight
-            radius: 5
+	    model: editDialog.fields
 
-            RowLayout {
-		anchors.left: parent.left
-                anchors.right: parent.right
-		anchors.verticalCenter: parent.verticalCenter
-                anchors.margins: 15
-                spacing: 15
+	    delegate: Rectangle {
+		height: 45
+		width: parent.width
+		color: palette.midlight
+		radius: 5
 
-                Text {
-		    text: modelData.name + ":"
-		    color: edit.Material.accent
-                }
+		RowLayout {
+		    id: row
+		    anchors.left: parent.left
+                    anchors.right: parent.right
+		    anchors.verticalCenter: parent.verticalCenter
+                    anchors.margins: 15
+                    spacing: 15
 
-		Text {
-		    text: editDialog.data != null ?
-			editDialog.data[modelData.display] : ""
-		    color: palette.text
+		    property bool editing: false
+		    property string editValue: editDialog.editData != null ?
+			editDialog.editData[modelData.display] : ""
+
+                    Text {
+			text: modelData.name + ":"
+			color: edit.Material.accent
+			font.bold: true
+                    }
+
+		    Text {
+			id: textView
+			text: row.editValue
+			Layout.leftMargin: 16
+			color: palette.text
+			visible: !row.editing
+		    }
+
+		    TextField {
+			id: textEdit
+			Layout.preferredWidth: 150
+			Layout.fillHeight: parent.height
+
+			text: row.editValue
+			color: "#d0d0d0"
+			visible: row.editing
+
+			background: Rectangle {
+			    color: palette.midlight
+			}
+                    }
+
+		    Item {
+			Layout.fillWidth: true
+		    }
+
+                    Boton {
+			id: edit
+			Layout.preferredWidth: 40
+			Layout.preferredHeight: 40
+			iconSource: "qrc:/img/images/pen.svg"
+
+			onClicked: {
+			    textEdit.forceActiveFocus()
+			    row.editing = true
+			}
+                    }
 		}
-
-		Item {
-		    Layout.fillWidth: true
-		}
-
-                Boton {
-		    id: edit
-		    Layout.preferredWidth: 40
-		    Layout.preferredHeight: 40
-		    iconSource: "qrc:/img/images/pen.svg"
-                }
             }
-        }
+	}
     }
 }
