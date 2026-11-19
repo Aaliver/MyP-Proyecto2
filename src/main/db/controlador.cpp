@@ -65,6 +65,11 @@ void Controlador::actualizaArtista(const QVariantMap& datos) {
   artistaDao.updateArtista(artista);
 }
 
+void Controlador::eliminaRola(const QVariantMap& datos) {
+  rolaDao.deleteRola(datos["id_rola"].toInt());
+  actualizaRolas(rolaDao.getRolas());
+}
+
 void Controlador::buscaRolas(const QVariantMap& parametros) {
   ParamRola param;
   if (parametros.contains("title"))

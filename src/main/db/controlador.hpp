@@ -77,6 +77,12 @@ public:
   Q_INVOKABLE void actualizaArtista(const QVariantMap& datos);
 
   /**
+   * @brief Elimina una rola de la base de datos.
+   * @param datos los datos de la rola a eliminar.
+   */
+  Q_INVOKABLE void eliminaRola(const QVariantMap& datos);
+
+  /**
    * @brief Busca las rolas que cumplen ciertos criterios.
    * @param parametros los criterios que deben cumplir las rolas a buscar.
    */
