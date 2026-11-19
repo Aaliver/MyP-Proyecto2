@@ -74,7 +74,7 @@ ToolBar {
         height: 45
 	anchors.right: mineButton.left
 	anchors.rightMargin: 10
-	iconSource: "qrc:/img/images/search.svg"
+	iconSource: "qrc:/img/images/form.svg"
 	icon.color: "transparent"
 	onClicked: search.open()
     }
