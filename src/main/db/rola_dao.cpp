@@ -75,6 +75,61 @@ void RolaDao::deleteRola(int id) {
   sqlite3_finalize(stmt);
 }
 
+std::vector<Rola> RolaDao::searchRolas(const ParamRola& param) const {
+  sqlite3_stmt* stmt;
+  std::string sql = "SELECT r.* FROM rolas r LEFT JOIN albums a ON a.id_album = r.id_album LEFT JOIN performers p ON p.id_performer = r.id_performer WHERE 1 = 1";
+  if (param.title.has_value())
+    sql += " AND r.title LIKE ?";
+  if (param.year.has_value())
+    sql += " AND r.year = ?";
+  if (param.genre.has_value())
+    sql += " AND r.genre LIKE ?";
+  if (param.album.has_value())
+    sql += " AND a.name LIKE ?";
+  if (param.artist.has_value())
+    sql += " AND p.name LIKE ?";
+  sql += ";";
+  if (sqlite3_prepare_v2(conexion, sql.c_str(), -1, &stmt, nullptr) != SQLITE_OK)
+    throw std::runtime_error("Error al preparar la consulta.");
+  int index = 1;
+  if (param.title.has_value()) {
+    std::string title = "%" + param.title.value() + "%";
+    sqlite3_bind_text(stmt, index++, title.c_str(), -1, SQLITE_TRANSIENT);
+  }
+  if (param.year.has_value())
+    sqlite3_bind_int(stmt, index++, param.year.value());
+  if (param.genre.has_value()) {
+    std::string genre = "%" + param.genre.value() + "%";
+    sqlite3_bind_text(stmt, index++, genre.c_str(), -1, SQLITE_TRANSIENT);
+  }
+  if (param.album.has_value()) {
+    std::string album = "%" + param.album.value() + "%";
+    sqlite3_bind_text(stmt, index++, album.c_str(), -1, SQLITE_TRANSIENT);
+  }
+  if (param.artist.has_value()) {
+    std::string artist = "%" + param.artist.value() + "%";
+    sqlite3_bind_text(stmt, index++, artist.c_str(), -1, SQLITE_TRANSIENT);
+  }
+  int rc;
+  std::vector<Rola> rolas;
+  while ((rc = sqlite3_step(stmt)) == SQLITE_ROW) {
+    Rola rola;
+    rola.setRolaId(sqlite3_column_int(stmt, 0));
+    rola.setArtistId(sqlite3_column_int(stmt, 1));
+    rola.setAlbumId(sqlite3_column_int(stmt, 2));
+    rola.setPath(DaoUtils::castString(stmt, 3));
+    rola.setTitle(DaoUtils::castString(stmt, 4));
+    rola.setTrack(sqlite3_column_int(stmt, 5));
+    rola.setYear(sqlite3_column_int(stmt, 6));
+    rola.setGenre(DaoUtils::castString(stmt, 7));
+    rolas.push_back(rola);
+  }
+  if (rc != SQLITE_DONE)
+    DaoUtils::sqliteError(stmt, "Error al completar la consulta.");
+  sqlite3_finalize(stmt);
+  return rolas;
+}
+
 std::vector<Rola> RolaDao::getRolas() const {
   sqlite3_stmt* stmt;
   const char* sql = "SELECT * FROM rolas;";

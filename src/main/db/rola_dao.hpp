@@ -8,6 +8,7 @@
 #include <unordered_set>
 #include <vector>
 
+#include "param_rola.hpp"
 #include "rola.hpp"
 
 /**
@@ -53,6 +54,14 @@ public:
    * @param id el identificador de la rola a eliminar.
    */
   void deleteRola(int id);
+
+  /**
+   * @brief Regresa un vector con las rolas de la base de datos que cumplen ciertos
+   *        criterios.
+   * @param param los criterios a cumplir.
+   * @return un vector con las rolas de la base de datos que cumplen los criterios.
+   */
+  std::vector<Rola> searchRolas(const ParamRola& param) const;
 
   /**
    * @brief Regresa un vector con las rolas de la base de datos.
