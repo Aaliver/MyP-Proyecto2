@@ -22,6 +22,10 @@
  */
 class Controlador : public QObject {
   Q_OBJECT
+  /**
+   * @brief Las rolas de la base de datos.
+   * Emite rolasChanged() cuando se modifican.
+   */
   Q_PROPERTY(QVariantList rolas READ getRolas NOTIFY rolasChanged)
 
 private:
@@ -54,6 +58,21 @@ public:
    * @brief Mina el directorio y muestra los resultados.
    */
   Q_INVOKABLE void minar();
+
+  /**
+   * @brief Actualiza una rola en la base de datos.
+   */
+  Q_INVOKABLE void actualizaRola(const QVariantMap& datos);
+
+  /**
+   * @brief Actualiza un album en la base de datos.
+   */
+  Q_INVOKABLE void actualizaAlbum(const QVariantMap& datos);
+
+  /**
+   * @brief Actualiza un artista en la base de datos.
+   */
+  Q_INVOKABLE void actualizaArtista(const QVariantMap& datos);
 
   /**
    * @brief Regresa las rolas de la base de datos.

@@ -2,7 +2,10 @@
 
 #include <QUrl>
 
+#include "album.hpp"
+#include "artista.hpp"
 #include "minero.hpp"
+#include "rola.hpp"
 
 Controlador::Controlador(std::filesystem::path ruta, QObject* parent) :
   QObject(parent), ruta(ruta), rolaDao(db.getConexion()),
@@ -31,6 +34,37 @@ void Controlador::actualizaRolas() {
         rolas.append(fila);
     }
     emit rolasChanged();
+}
+
+void Controlador::actualizaRola(const QVariantMap& datos) {
+  Rola rola;
+  rola.setRolaId(datos["id_rola"].toInt());
+  rola.setArtistId(datos["id_performer"].toInt());
+  rola.setAlbumId(datos["id_album"].toInt());
+  rola.setPath(datos["path"].toString().toStdString());
+  rola.setTitle(datos["title"].toString().toStdString());
+  rola.setTrack(datos["track"].toInt());
+  rola.setYear(datos["year"].toInt());
+  rola.setGenre(datos["genre"].toString().toStdString());
+  rolaDao.updateRola(rola);
+  actualizaRolas();
+}
+
+void Controlador::actualizaAlbum(const QVariantMap& datos) {
+  Album album;
+  album.setId(datos["id_album"].toInt());
+  album.setPath(datos["path"].toString().toStdString());
+  album.setName(datos["name"].toString().toStdString());
+  album.setYear(datos["year"].toInt());
+  albumDao.updateAlbum(album);
+}
+
+void Controlador::actualizaArtista(const QVariantMap& datos) {
+  Artista artista;
+  artista.setId(datos["id_performer"].toInt());
+  artista.setIdType(datos["id_type"].toInt());
+  artista.setName(datos["name"].toString().toStdString());
+  artistaDao.updateArtista(artista);
 }
 
 QVariantList Controlador::getRolas() const {
