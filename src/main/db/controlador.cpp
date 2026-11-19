@@ -14,12 +14,12 @@ void Controlador::minar() {
   artistaDao.addArtistas(elementos.artistasNuevos);
   albumDao.addAlbums(elementos.albumsNuevos);
   rolaDao.addRolas(elementos.rolasNuevas);
-  actualizaRolas();
+  actualizaRolas(rolaDao.getRolas());
 }
 
-void Controlador::actualizaRolas() {
+void Controlador::actualizaRolas(std::vector<Rola> nuevasRolas) {
     rolas.clear();
-    for (const auto& rola: rolaDao.getRolas()) {
+    for (const auto& rola: nuevasRolas) {
         QVariantMap fila;
         fila["id_rola"] = rola.getRolaId();
         fila["id_performer"] = rola.getArtistId();
@@ -45,7 +45,7 @@ void Controlador::actualizaRola(const QVariantMap& datos) {
   rola.setYear(datos["year"].toInt());
   rola.setGenre(datos["genre"].toString().toStdString());
   rolaDao.updateRola(rola);
-  actualizaRolas();
+  actualizaRolas(rolaDao.getRolas());
 }
 
 void Controlador::actualizaAlbum(const QVariantMap& datos) {
@@ -63,6 +63,21 @@ void Controlador::actualizaArtista(const QVariantMap& datos) {
   artista.setIdType(datos["id_type"].toInt());
   artista.setName(datos["name"].toString().toStdString());
   artistaDao.updateArtista(artista);
+}
+
+void Controlador::buscaRolas(const QVariantMap& parametros) {
+  ParamRola param;
+  if (parametros.contains("title"))
+    param.title = parametros["title"].toString().toStdString();
+  if (parametros.contains("year"))
+    param.year = parametros["year"].toInt();
+  if (parametros.contains("genre"))
+    param.genre = parametros["genre"].toString().toStdString();
+  if (parametros.contains("album"))
+    param.album = parametros["album"].toString().toStdString();
+  if (parametros.contains("performer"))
+    param.artist = parametros["performer"].toString().toStdString();
+  actualizaRolas(rolaDao.searchRolas(param));
 }
 
 QUrl Controlador::getQUrl(const QString& path) const {

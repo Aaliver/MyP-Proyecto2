@@ -14,6 +14,7 @@
 #include "album_dao.hpp"
 #include "artista_dao.hpp"
 #include "base_datos.hpp"
+#include "rola.hpp"
 #include "rola_dao.hpp"
 
 /**
@@ -46,7 +47,7 @@ private:
   QVariantList rolas;
 
   /* Actualiza las rolas. */
-  void actualizaRolas();
+  void actualizaRolas(std::vector<Rola> nuevasRolas);
 
 public:
 
@@ -74,6 +75,12 @@ public:
    * @brief Actualiza un artista en la base de datos.
    */
   Q_INVOKABLE void actualizaArtista(const QVariantMap& datos);
+
+  /**
+   * @brief Busca las rolas que cumplen ciertos criterios.
+   * @param parametros los criterios que deben cumplir las rolas a buscar.
+   */
+  Q_INVOKABLE void buscaRolas(const QVariantMap& parametros);
 
   /**
    * Regresa la QUrl de una ruta.
