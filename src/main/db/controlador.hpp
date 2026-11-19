@@ -53,26 +53,30 @@ public:
 
   /**
    * @brief El constructor.
+   * @param ruta la ruta del directorio donde obtener los datos de la base de datos.
    */
   explicit Controlador(std::filesystem::path ruta, QObject* parent = nullptr);
 
   /**
-   * @brief Mina el directorio y muestra los resultados.
+   * @brief Mina el directorio.
    */
   Q_INVOKABLE void minar();
 
   /**
    * @brief Actualiza una rola en la base de datos.
+   * @param datos los datos de la rola a actualizar.
    */
   Q_INVOKABLE void actualizaRola(const QVariantMap& datos);
 
   /**
    * @brief Actualiza un album en la base de datos.
+   * @param datos los datos del album a actualizar.
    */
   Q_INVOKABLE void actualizaAlbum(const QVariantMap& datos);
 
   /**
    * @brief Actualiza un artista en la base de datos.
+   * @param datos los datos del artista a actualizar.
    */
   Q_INVOKABLE void actualizaArtista(const QVariantMap& datos);
 
@@ -89,7 +93,7 @@ public:
   Q_INVOKABLE void buscaRolas(const QVariantMap& parametros);
 
   /**
-   * Regresa la QUrl de una ruta.
+   * @brief Regresa la QUrl de una ruta.
    * @param path la ruta de la que obtener la QUrl.
    * @return la QUrl de una ruta.
    */
@@ -97,6 +101,7 @@ public:
 
   /**
    * @brief Regresa las rolas de la base de datos.
+   * @return las rolas de la base de datos.
    */
   QVariantList getRolas() const;
 

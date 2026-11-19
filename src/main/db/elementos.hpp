@@ -18,17 +18,17 @@
 struct Elementos {
 
   /**
-   * Las rolas nuevas.
+   * @brief Las rolas nuevas.
    */
   std::vector<Rola> rolasNuevas;
 
   /**
-   * Los albums nuevos.
+   * @brief Los albums nuevos.
    */
   std::vector<Album> albumsNuevos;
 
   /**
-   * Los artistas nuevos.
+   * @brief Los artistas nuevos.
    */
   std::vector<Artista> artistasNuevos;
 };

@@ -21,18 +21,20 @@ private:
 public:
 
   /**
-   * El constructor.
+   * @brief El constructor.
+   * @details Abre la conexión a la base de datos.
    */
   BaseDeDatos();
 
   /**
-   * El destructor.
+   * @brief El destructor.
+   * @details Cierra la conexión a la base de datos.
    */
   ~BaseDeDatos();
 
   /**
-   * Regresa la conexión de la base de datos.
-   * @return la conexión de la base de datos.
+   * @return Regresa la conexión a la base de datos.
+   * @return la conexión a la base de datos.
    */
   sqlite3* getConexion() const;
 };

@@ -27,49 +27,49 @@ private:
 public:
 
   /**
-   * Define el identificador del album.
+   * @brief Define el identificador del album.
    * @param id el identificador del album.
    */
   void setId(int id);
 
   /**
-   * Regresa el identificador del album.
+   * @brief Regresa el identificador del album.
    * @return el identificador del album.
    */
   int getId() const;
 
   /**
-   * Define la ruta del album.
+   * @brief Define la ruta del album.
    * @param path la ruta del album.
    */
   void setPath(std::string path);
 
   /**
-   * Regresa la ruta del album.
+   * @brief Regresa la ruta del album.
    * @return la ruta del album.
    */
   std::string getPath() const;
 
   /**
-   * Define el nombre del album.
+   * @brief Define el nombre del album.
    * @param name el nombre del album.
    */
   void setName(std::string name);
 
   /**
-   * Regresa el nombre del album.
+   * @brief Regresa el nombre del album.
    * @return el nombre del album.
    */
   std::string getName() const;
 
   /**
-   * Define el año del album.
+   * @brief Define el año del album.
    * @param year el año del album.
    */
   void setYear(int year);
 
   /**
-   * Regresa el año del album.
+   * @brief Regresa el año del album.
    * @return el año del album.
    */
   int getYear() const;

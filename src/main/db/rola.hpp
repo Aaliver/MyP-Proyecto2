@@ -35,97 +35,97 @@ private:
 public:
 
   /**
-   * Define el identificador de la rola.
+   * @brief Define el identificador de la rola.
    * @param id el identificador de la rola.
    */
   void setRolaId(int id);
 
   /**
-   * Regresa el identificador de la rola.
+   * @brief Regresa el identificador de la rola.
    * @return el identificador de la rola.
    */
   int getRolaId() const;
 
   /**
-   * Define el identificador del artista.
+   * @brief Define el identificador del artista.
    * @param id el identificador de artista.
    */
   void setArtistId(int id);
 
   /**
-   * Regresa el identificador del artista.
+   * @brief Regresa el identificador del artista.
    * @return el identificador del artista.
    */
   int getArtistId() const;
 
   /**
-   * Define el identificador del album.
+   * @brief Define el identificador del album.
    * @param id el identificador del album.
    */
   void setAlbumId(int id);
 
   /**
-   * Regresa el identificador del album.
+   * @brief Regresa el identificador del album.
    * @return el identificador del album.
    */
   int getAlbumId() const;
 
   /**
-   * Define la ruta de la rola.
+   * @brief Define la ruta de la rola.
    * @param path la ruta de la rola.
    */
   void setPath(std::string path);
 
   /**
-   * Regresa la ruta de la rola.
+   * @brief Regresa la ruta de la rola.
    * @return la ruta de la rola.
    */
   std::string getPath() const;
 
   /**
-   * Define el título de la rola.
+   * @brief Define el título de la rola.
    * @param title el título de la rola.
    */
   void setTitle(std::string title);
 
   /**
-   * Regresa el título de la rola.
+   * @brief Regresa el título de la rola.
    * @return el título de la rola.
    */
   std::string getTitle() const;
 
   /**
-   * Define la pista de la rola.
+   * @brief Define la pista de la rola.
    * @param track la pista de la rola.
    */
   void setTrack(int track);
 
   /**
-   * Regresa la pista de la rola.
+   * @brief Regresa la pista de la rola.
    * @return la pista de la rola.
    */
   int getTrack() const;
 
   /**
-   * Define el año de la rola.
+   * @brief Define el año de la rola.
    * @param year el año de la rola.
    */
   void setYear(int year);
 
   /**
-   * Regresa el año de la rola.
+   * @brief Regresa el año de la rola.
    * @return el año de la rola.
    */
   int getYear() const;
 
   /**
-   * Define el género de la rola.
+   * @brief Define el género de la rola.
    * @param genre el género ruta de la rola.
    */
   void setGenre(std::string genre);
 
   /**
-   * Regresa el género de la rola.
+   * @brief Regresa el género de la rola.
    * @return el género de la rola.
    */
   std::string getGenre() const;
