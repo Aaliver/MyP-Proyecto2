@@ -9,6 +9,7 @@ ToolBar {
     property var selectedData: null
 
     Boton {
+	id: editButton
 	width: 45
         height: 45
 	anchors.left: parent.left
@@ -16,7 +17,7 @@ ToolBar {
 	iconSource: "qrc:/img/images/edit.png"
 	icon.color: "transparent"
 	onClicked: {
-	    if (headerBar.selectedData != null) {
+	    if (headerBar.selectedData !== null) {
 		openEditor(EditDialog.Edit.Rola,
 			   [
 			       { name: "Título", display: "title" },
@@ -50,6 +51,20 @@ ToolBar {
 		break
 	    default:
 	    }
+	}
+    }
+
+    Boton {
+	id: deleteButton
+	width: 45
+        height: 45
+	anchors.left: editButton.right
+	anchors.leftMargin: 10
+	iconSource: "qrc:/img/images/trash.svg"
+	icon.color: "transparent"
+	onClicked: {
+	    if (selectedData !== null)
+		controlador.eliminaRola(selectedData)
 	}
     }
 
