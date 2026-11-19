@@ -17,19 +17,40 @@ ToolBar {
 	icon.color: "transparent"
 	onClicked: {
 	    if (headerBar.selectedData != null) {
-		editRola.editData = headerBar.selectedData
-		editRola.open()
+		openEditor(EditDialog.Edit.Rola,
+			   [
+			       { name: "Título", display: "title" },
+			       { name: "Año", display: "year" },
+			       { name: "Género", display: "genre" }
+			   ])
 	    }
 	}
     }
 
+    function openEditor(type, fields: var) {
+	editor.edit = type
+	editor.editData = selectedData
+	editor.fields = fields
+	editor.open()
+    }
+
     EditDialog {
-	id: editRola
-	fields: [
-            { name: "Título", display: "title" },
-            { name: "Año", display: "year" },
-            { name: "Género", display: "genre" }
-	]
+	id: editor
+
+	onSaveData: (editType, values) => {
+	    switch (editType) {
+	    case EditDialog.Edit.Rola:
+		controlador.actualizaRola(values)
+		break
+	    case EditDialog.Edit.Album:
+		controlador.actualizaAlbum(values)
+		break
+	    case EditDialog.Edit.Artist:
+		controlador.actualizaArtista(values)
+		break
+	    default:
+	    }
+	}
     }
 
     SearchField {

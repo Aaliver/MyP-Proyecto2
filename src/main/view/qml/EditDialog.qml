@@ -14,6 +14,16 @@ Dialog {
     property var editData: null
     property var fields: []
 
+    property int edit: EditDialog.Edit.Default
+    enum Edit {
+	Rola,
+	Album,
+	Artist,
+	Default
+    }
+
+    signal saveData(int editType, var values)
+
     Loader {
 	anchors.fill: parent
 	active: editDialog.visible
@@ -74,6 +84,10 @@ Dialog {
 			background: Rectangle {
 			    color: palette.midlight
 			}
+
+			onTextEdited: {
+			    editDialog.editData[modelData.display] = text
+			}
                     }
 
 		    Item {
@@ -94,5 +108,9 @@ Dialog {
 		}
             }
 	}
+    }
+
+    onAccepted: {
+	saveData(edit, editData)
     }
 }
