@@ -1,7 +1,5 @@
 #include "controlador.hpp"
 
-#include <QUrl>
-
 #include "album.hpp"
 #include "artista.hpp"
 #include "minero.hpp"
@@ -11,7 +9,7 @@ Controlador::Controlador(std::filesystem::path ruta, QObject* parent) :
   QObject(parent), ruta(ruta), rolaDao(db.getConexion()),
   albumDao(db.getConexion()), artistaDao(db.getConexion()) {}
 
-Q_INVOKABLE void Controlador::minar() {
+void Controlador::minar() {
   Elementos elementos = Minero::mina(ruta, rolaDao, albumDao, artistaDao);
   artistaDao.addArtistas(elementos.artistasNuevos);
   albumDao.addAlbums(elementos.albumsNuevos);
@@ -26,7 +24,7 @@ void Controlador::actualizaRolas() {
         fila["id_rola"] = rola.getRolaId();
         fila["id_performer"] = rola.getArtistId();
         fila["id_album"] = rola.getAlbumId();
-        fila["path"] = QUrl::fromLocalFile(QString::fromStdString(rola.getPath()));
+        fila["path"] = QString::fromStdString(rola.getPath());
         fila["title"] = QString::fromStdString(rola.getTitle());
         fila["track"] = rola.getTrack();
         fila["year"] = rola.getYear();
@@ -67,6 +65,10 @@ void Controlador::actualizaArtista(const QVariantMap& datos) {
   artistaDao.updateArtista(artista);
 }
 
+QUrl Controlador::getQUrl(const QString& path) const {
+  return QUrl::fromLocalFile(path);
+}
+
 QVariantList Controlador::getRolas() const {
-    return rolas;
+  return rolas;
 }

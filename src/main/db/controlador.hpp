@@ -7,6 +7,7 @@
 #include <filesystem>
 
 #include <QObject>
+#include <QUrl>
 #include <QVariantList>
 #include <QVariantMap>
 
@@ -73,6 +74,13 @@ public:
    * @brief Actualiza un artista en la base de datos.
    */
   Q_INVOKABLE void actualizaArtista(const QVariantMap& datos);
+
+  /**
+   * Regresa la QUrl de una ruta.
+   * @param path la ruta de la que obtener la QUrl.
+   * @return la QUrl de una ruta.
+   */
+  Q_INVOKABLE QUrl getQUrl(const QString& path) const;
 
   /**
    * @brief Regresa las rolas de la base de datos.

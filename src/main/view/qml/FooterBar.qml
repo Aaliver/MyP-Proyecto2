@@ -17,7 +17,7 @@ ToolBar {
     MediaPlayer {
 	id: player
 	audioOutput: musicOutput
-	source: selectedRola !== null ? selectedRola["path"] : ""
+	source: selectedRola !== null ? controlador.getQUrl(selectedRola.path) : ""
 
 	function time(ms) {
 	    if (ms <= 0 || isNaN(ms))
