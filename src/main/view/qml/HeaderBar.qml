@@ -53,14 +53,21 @@ ToolBar {
 	}
     }
 
-    SearchField {
-	width: parent.width / 3
-        height: 30
+    Boton {
+	id: searchButton
+	width: 45
+        height: 45
 	anchors.right: mineButton.left
 	anchors.rightMargin: 10
-	anchors.verticalCenter: parent.verticalCenter
+	iconSource: "qrc:/img/images/search.svg"
+	icon.color: "transparent"
+	onClicked: search.open()
+    }
 
-	placeholderText: "Buscar..."
+    SearchForm {
+	id: search
+
+	onSearchData: (values) => { controlador.buscaRolas(values) }
     }
 
     Boton {
