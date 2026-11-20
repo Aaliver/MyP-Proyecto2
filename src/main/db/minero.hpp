@@ -2,16 +2,14 @@
  * @file minero.hpp
  * @brief Definción del minero.
  */
-
 #pragma once
 
 #include <filesystem>
 #include <string>
+#include <unordered_map>
+#include <unordered_set>
 
 #include "elementos.hpp"
-#include "album_dao.hpp"
-#include "artista_dao.hpp"
-#include "rola_dao.hpp"
 
 /**
  * @namespace Minero
@@ -24,14 +22,12 @@ namespace Minero {
   /**
    * @brief Regresa los elementos que no forman parte de la base de datos.
    * @param ruta la ruta del directorio del que obtener los elementos.
-   * @param rolaDao el dao del que obtener las rolas que ya pertenecen a la base de
-   *        datos.
-   * @param albumDao el dao del que obtener los albums que ya pertenecen a la base de
-   *        datos.
-   * @param artistaDao el dao del que obtener los artistas que ya pertenecen a la base
-   *        de datos.
+   * @param rolas las rolas que ya pertenecen a la base de datos.
+   * @param albums los albums que ya pertenecen a la base de datos.
+   * @param artistas los artistas que ya pertenecen a la base de datos.
    * @return los elementos que no forman parte de la base de datos.
    */
-  Elementos mina(std::filesystem::path ruta, const RolaDao& rolaDao,
-		 const AlbumDao& albumDao, const ArtistaDao& artistaDao);
+  Elementos mina(std::filesystem::path ruta, std::unordered_set<std::string>& rolas,
+		 std::unordered_map<std::string, int>& albums,
+		 std::unordered_set<std::string>& artistas);
 };

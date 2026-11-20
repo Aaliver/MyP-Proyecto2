@@ -1,5 +1,8 @@
 #include "controlador.hpp"
 
+#include <unordered_map>
+#include <unordered_set>
+
 #include "album.hpp"
 #include "artista.hpp"
 #include "minero.hpp"
@@ -10,7 +13,10 @@ Controlador::Controlador(std::filesystem::path ruta, QObject* parent) :
   albumDao(db.getConexion()), artistaDao(db.getConexion()) {}
 
 void Controlador::minar() {
-  Elementos elementos = Minero::mina(ruta, rolaDao, albumDao, artistaDao);
+  std::unordered_set<std::string> rolas = rolaDao.getRolasPath();
+  std::unordered_map<std::string, int> albums = albumDao.getAlbumsIds();
+  std::unordered_set<std::string> artistas = artistaDao.getArtistasNames();
+  Elementos elementos = Minero::mina(ruta, rolas, albums, artistas);
   artistaDao.addArtistas(elementos.artistasNuevos);
   std::unordered_map<std::string, int> albumsNuevos = albumDao.addAlbums(elementos.albumsNuevos);
   rolaDao.addRolas(elementos.rolasNuevas);

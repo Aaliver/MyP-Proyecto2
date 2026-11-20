@@ -1,8 +1,5 @@
 #include "minero.hpp"
 
-#include <unordered_set>
-#include <unordered_map>
-
 #include <fileref.h>
 #include <tag.h>
 
@@ -56,12 +53,11 @@ namespace {
   }
 }
 
-Elementos Minero::mina(std::filesystem::path ruta, const RolaDao& rolaDao,
-		       const AlbumDao& albumDao, const ArtistaDao& artistaDao) {
+Elementos Minero::mina(std::filesystem::path ruta,
+		       std::unordered_set<std::string>& rolas,
+		       std::unordered_map<std::string, int>& albums,
+		       std::unordered_set<std::string>& artistas) {
   Elementos elementos;
-  std::unordered_set<std::string> rolas = rolaDao.getRolasPath();
-  std::unordered_map<std::string, int> albums = albumDao.getAlbumsIds();
-  std::unordered_set<std::string> artistas = artistaDao.getArtistasNames();
 
   try {
     for (const auto& entrada : fs::recursive_directory_iterator(ruta, fs::directory_options::skip_permission_denied))
