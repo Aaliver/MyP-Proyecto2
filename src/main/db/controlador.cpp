@@ -12,7 +12,7 @@ Controlador::Controlador(std::filesystem::path ruta, QObject* parent) :
 void Controlador::minar() {
   Elementos elementos = Minero::mina(ruta, rolaDao, albumDao, artistaDao);
   artistaDao.addArtistas(elementos.artistasNuevos);
-  albumDao.addAlbums(elementos.albumsNuevos);
+  std::unordered_map<std::string, int> albumsNuevos = albumDao.addAlbums(elementos.albumsNuevos);
   rolaDao.addRolas(elementos.rolasNuevas);
   actualizaRolas(rolaDao.getRolas());
 }

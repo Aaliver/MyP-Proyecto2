@@ -32,8 +32,11 @@ public:
   /**
    * @brief Añade albums a la base de datos.
    * @param albums los albums a añadir.
+   * @return un diccionario con los ids de los albums añadidos.
+   * @details El diccionario usa como llave los paths y como valor los ids de cada
+   *          album añadido.
    */
-  void addAlbums(const std::vector<Album>& albums);
+  std::unordered_map<std::string, int> addAlbums(const std::vector<Album>& albums);
 
   /**
    * @brief Regresa un album de la base de datos.
