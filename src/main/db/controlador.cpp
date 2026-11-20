@@ -21,21 +21,23 @@ void Controlador::minar() {
   for (const auto& [path, id_album]: albumDao.addAlbums(elementos.albumsNuevos))
     albums[path] = id_album;
   rolaDao.addRolas(elementos.rolasNuevas, albums);
-  actualizaRolas(rolaDao.getRolas());
+  actualizaRolas(rolaDao.getRolasView());
 }
 
-void Controlador::actualizaRolas(std::vector<Rola> nuevasRolas) {
+void Controlador::actualizaRolas(const std::vector<VistaRola>& nuevasRolas) {
     rolas.clear();
-    for (const auto& rola: nuevasRolas) {
+    for (const auto& vista: nuevasRolas) {
         QVariantMap fila;
-        fila["id_rola"] = rola.getRolaId();
-        fila["id_performer"] = rola.getArtistId();
-        fila["id_album"] = rola.getAlbumId();
-        fila["path"] = QString::fromStdString(rola.getPath());
-        fila["title"] = QString::fromStdString(rola.getTitle());
-        fila["track"] = rola.getTrack();
-        fila["year"] = rola.getYear();
-        fila["genre"] = QString::fromStdString(rola.getGenre());
+        fila["id_rola"] = vista.rola.getRolaId();
+        fila["id_performer"] = vista.rola.getArtistId();
+        fila["performer"] = QString::fromStdString(vista.artista);
+        fila["id_album"] = vista.rola.getAlbumId();
+        fila["album"] = QString::fromStdString(vista.album);
+        fila["path"] = QString::fromStdString(vista.rola.getPath());
+        fila["title"] = QString::fromStdString(vista.rola.getTitle());
+        fila["track"] = vista.rola.getTrack();
+        fila["year"] = vista.rola.getYear();
+        fila["genre"] = QString::fromStdString(vista.rola.getGenre());
         rolas.append(fila);
     }
     emit rolasChanged();
@@ -52,7 +54,7 @@ void Controlador::actualizaRola(const QVariantMap& datos) {
   rola.setYear(datos["year"].toInt());
   rola.setGenre(datos["genre"].toString().toStdString());
   rolaDao.updateRola(rola);
-  actualizaRolas(rolaDao.getRolas());
+  actualizaRolas(rolaDao.getRolasView());
 }
 
 void Controlador::actualizaAlbum(const QVariantMap& datos) {
@@ -74,7 +76,7 @@ void Controlador::actualizaArtista(const QVariantMap& datos) {
 
 void Controlador::eliminaRola(const QVariantMap& datos) {
   rolaDao.deleteRola(datos["id_rola"].toInt());
-  actualizaRolas(rolaDao.getRolas());
+  actualizaRolas(rolaDao.getRolasView());
 }
 
 void Controlador::buscaRolas(const QVariantMap& parametros) {

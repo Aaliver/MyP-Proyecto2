@@ -12,6 +12,7 @@
 #include "param_rola.hpp"
 #include "rola.hpp"
 #include "rola_nueva.hpp"
+#include "vista_rola.hpp"
 
 /**
  * @class RolaDao
@@ -61,11 +62,11 @@ public:
 
   /**
    * @brief Regresa un vector con las rolas de la base de datos que cumplen ciertos
-   *        criterios.
+   *        criterios junto con sus álbumes y sus artistas.
    * @param param los criterios a cumplir.
    * @return un vector con las rolas de la base de datos que cumplen los criterios.
    */
-  std::vector<Rola> searchRolas(const ParamRola& param) const;
+  std::vector<VistaRola> searchRolas(const ParamRola& param) const;
 
   /**
    * @brief Regresa un vector con las rolas de la base de datos.
@@ -78,4 +79,11 @@ public:
    * @return un conjunto con las rutas de todas las rolas.
    */
   std::unordered_set<std::string> getRolasPath() const;
+
+  /**
+   * @brief Regresa un vector con las rolas de la base de datos junto con sus
+   *        álbumes y sus artistas.
+   * @return un vector con todas rolas.
+   */
+  std::vector<VistaRola> getRolasView() const;
 };

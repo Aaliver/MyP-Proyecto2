@@ -14,8 +14,8 @@
 #include "album_dao.hpp"
 #include "artista_dao.hpp"
 #include "base_datos.hpp"
-#include "rola.hpp"
 #include "rola_dao.hpp"
+#include "vista_rola.hpp"
 
 /**
  * @class Controlador
@@ -47,7 +47,7 @@ private:
   QVariantList rolas;
 
   /* Actualiza las rolas. */
-  void actualizaRolas(std::vector<Rola> nuevasRolas);
+  void actualizaRolas(const std::vector<VistaRola>& nuevasRolas);
 
 public:
 
