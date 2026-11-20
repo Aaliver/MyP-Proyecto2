@@ -31,9 +31,13 @@ public:
 
   /**
    * @brief Añade artistas a la base de datos.
-   * @param artistas el vector con los artistas a añadir.
+   * @param artistas los artistas a añadir.
+   * @return un diccionario con los ids de los artistas añadidos.
+   * @details El diccionario usa como llave los names y como valor los ids de cada
+   *          artista añadido.
    */
-  void addArtistas(const std::vector<Artista>& artistas);
+  std::unordered_map<std::string, int> addArtistas(const std::vector<Artista>&
+						   artistas);
 
   /**
    * @brief Regresa un artista de la base de datos.
