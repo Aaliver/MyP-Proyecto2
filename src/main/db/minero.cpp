@@ -41,7 +41,7 @@ namespace {
 
   void nuevoElemento(std::string ruta, std::string directorio, Elementos& elementos,
 		     std::unordered_map<std::string, int>& albums,
-		     std::unordered_set<std::string>& artistas) {
+		     std::unordered_map<std::string, int>& artistas) {
     TagLib::FileRef file(ruta.c_str());
     if (file.isNull() || file.tag() == nullptr)
       return;
@@ -52,7 +52,7 @@ namespace {
       elementos.albumsNuevos.push_back(album);
     }
     std::string artistName = file.tag()->artist().to8Bit(utf8);
-    if (artistas.insert(artistName).second) {
+    if (artistas.insert({artistName, -1}).second) {
       nueva.performerName = artistName;
       elementos.artistasNuevos.push_back(nuevoArtista(artistName));
     }
@@ -64,7 +64,7 @@ namespace {
 Elementos Minero::mina(std::filesystem::path ruta,
 		       std::unordered_set<std::string>& rolas,
 		       std::unordered_map<std::string, int>& albums,
-		       std::unordered_set<std::string>& artistas) {
+		       std::unordered_map<std::string, int>& artistas) {
   Elementos elementos;
 
   try {

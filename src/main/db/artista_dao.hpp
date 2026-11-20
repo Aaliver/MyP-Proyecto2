@@ -5,7 +5,7 @@
 #pragma once
 
 #include <sqlite3.h>
-#include <unordered_set>
+#include <unordered_map>
 #include <vector>
 
 #include "artista.hpp"
@@ -55,8 +55,10 @@ public:
   void deleteArtista(int id);
 
   /**
-   * @brief Regresa un conjunto con los nombres de los artistas de la base de datos.
-   * @return un conjunto con los nombres de todas los artistas.
+   * @brief Regresa un diccionario con los ids de los artistas de la base de datos.
+   * @return un diccionario con los ids de todos los artistas.
+   * @details El diccionario usa como llave los names y como valor los ids de cada
+   *          artista en la base de datos.
    */
-  std::unordered_set<std::string> getArtistasNames() const;
+  std::unordered_map<std::string, int> getArtistasIds() const;
 };

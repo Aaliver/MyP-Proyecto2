@@ -29,5 +29,5 @@ namespace Minero {
    */
   Elementos mina(std::filesystem::path ruta, std::unordered_set<std::string>& rolas,
 		 std::unordered_map<std::string, int>& albums,
-		 std::unordered_set<std::string>& artistas);
+		 std::unordered_map<std::string, int>& artistas);
 };

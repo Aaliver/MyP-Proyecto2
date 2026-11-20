@@ -15,7 +15,7 @@ Controlador::Controlador(std::filesystem::path ruta, QObject* parent) :
 void Controlador::minar() {
   std::unordered_set<std::string> rolas = rolaDao.getRolasPath();
   std::unordered_map<std::string, int> albums = albumDao.getAlbumsIds();
-  std::unordered_set<std::string> artistas = artistaDao.getArtistasNames();
+  std::unordered_map<std::string, int> artistas = artistaDao.getArtistasIds();
   Elementos elementos = Minero::mina(ruta, rolas, albums, artistas);
   artistaDao.addArtistas(elementos.artistasNuevos);
   for (const auto& [path, id_album]: albumDao.addAlbums(elementos.albumsNuevos))

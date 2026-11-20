@@ -60,15 +60,15 @@ void ArtistaDao::deleteArtista(int id) {
   sqlite3_finalize(stmt);
 }
 
-std::unordered_set<std::string> ArtistaDao::getArtistasNames() const {
+std::unordered_map<std::string, int> ArtistaDao::getArtistasIds() const {
   sqlite3_stmt* stmt;
-  const char* sql = "SELECT name FROM performers;";
+  const char* sql = "SELECT id_performer, name FROM performers;";
   if (sqlite3_prepare_v2(conexion, sql, -1, &stmt, nullptr) != SQLITE_OK)
     throw std::runtime_error("Error al preparar la consulta.");
   int rc;
-  std::unordered_set<std::string> artistas;
+  std::unordered_map<std::string, int> artistas;
   while ((rc = sqlite3_step(stmt)) == SQLITE_ROW)
-    artistas.insert(DaoUtils::castString(stmt, 0));
+    artistas.insert({DaoUtils::castString(stmt, 1), sqlite3_column_int(stmt, 0)});
   if (rc != SQLITE_DONE)
     DaoUtils::sqliteError(stmt, "Error al completar la consulta.");
   sqlite3_finalize(stmt);
