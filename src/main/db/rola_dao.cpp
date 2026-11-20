@@ -5,13 +5,14 @@
 RolaDao::RolaDao(sqlite3* conexion) : conexion(conexion) {}
 
 void RolaDao::addRolas(const std::vector<RolaNueva>& rolas,
+		       std::unordered_map<std::string, int> artistas,
 		       std::unordered_map<std::string, int> albums) {
   sqlite3_stmt* stmt;
   const char* sql = "INSERT INTO rolas (id_performer, id_album, path, title, track, year, genre) VALUES (?, ?, ?, ?, ?, ?, ?);";
   if (sqlite3_prepare_v2(conexion, sql, -1, &stmt, nullptr) != SQLITE_OK)
     throw std::runtime_error("Error al preparar la consulta.");
   for (const auto& nueva: rolas) {
-    sqlite3_bind_int(stmt, 1, nueva.rola.getArtistId());
+    sqlite3_bind_int(stmt, 1, artistas.at(nueva.performerName));
     sqlite3_bind_int(stmt, 2, albums.at(nueva.albumPath));
     sqlite3_bind_text(stmt, 3, nueva.rola.getPath().c_str(), -1, SQLITE_TRANSIENT);
     sqlite3_bind_text(stmt, 4, nueva.rola.getTitle().c_str(), -1, SQLITE_TRANSIENT);

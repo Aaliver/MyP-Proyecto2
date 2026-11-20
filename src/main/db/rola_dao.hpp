@@ -36,9 +36,11 @@ public:
   /**
    * @brief Añade rolas a la base de datos.
    * @param rolas el vector con las rolas a añadir.
+   * @param artistas los artistas de las rolas a añadir.
    * @param albums los albums de las rolas a añadir.
    */
   void addRolas(const std::vector<RolaNueva>& rolas,
+		std::unordered_map<std::string, int> artistas,
 		std::unordered_map<std::string, int> albums);
 
   /**
