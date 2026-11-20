@@ -19,7 +19,7 @@ Page {
 
 	syncView: rolasView
 	clip: true
-	model: ["Titulo", "Año", "Género"]
+	model: ["Titulo", "Album", "Año", "Género"]
 
 	delegate: Rectangle {
 	    implicitWidth: 150
@@ -51,9 +51,10 @@ Page {
 
 	columnWidthProvider: function(column) {
 	    switch (column) {
-            case 0: return width * 0.50
-            case 1: return width * 0.15
-            case 2: return width * 0.35
+            case 0: return width * 0.40
+            case 1: return width * 0.25
+            case 2: return width * 0.10
+	    case 3: return width * 0.25
             default: return 100
 	    }
 	}
@@ -75,6 +76,7 @@ Page {
 
 	model: TableModel {
 	    TableModelColumn { display: "title" }
+	    TableModelColumn { display: "album" }
 	    TableModelColumn { display: "year" }
 	    TableModelColumn { display: "genre" }
 

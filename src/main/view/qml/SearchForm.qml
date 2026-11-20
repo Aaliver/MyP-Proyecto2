@@ -17,10 +17,10 @@ Dialog {
     ListModel {
 	id: searchModel
 	ListElement { name: "Título"; field: "title"; search: "" }
-	ListElement { name: "Año"; field: "year"; search: "" }
-	ListElement { name: "Género"; field: "genre"; search: "" }
 	ListElement { name: "Álbum"; field: "album"; search: "" }
 	ListElement { name: "Artista"; field: "performer"; search: "" }
+	ListElement { name: "Año"; field: "year"; search: "" }
+	ListElement { name: "Género"; field: "genre"; search: "" }
     }
 
     Loader {

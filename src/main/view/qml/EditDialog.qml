@@ -6,6 +6,7 @@ Dialog {
     id: editDialog
     width: window.width / 2.5
     height: window.height / 2
+    title: "Editar Rola"
 
     modal: true
     anchors.centerIn: Overlay.overlay
