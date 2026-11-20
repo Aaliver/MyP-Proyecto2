@@ -5,11 +5,13 @@
 #pragma once
 
 #include <sqlite3.h>
+#include <unordered_map>
 #include <unordered_set>
 #include <vector>
 
 #include "param_rola.hpp"
 #include "rola.hpp"
+#include "rola_nueva.hpp"
 
 /**
  * @class RolaDao
@@ -33,8 +35,10 @@ public:
   /**
    * @brief Añade rolas a la base de datos.
    * @param rolas el vector con las rolas a añadir.
+   * @param albums los albums de las rolas a añadir.
    */
-  void addRolas(const std::vector<Rola>& rolas);
+  void addRolas(const std::vector<RolaNueva>& rolas,
+		std::unordered_map<std::string, int> albums);
 
   /**
    * @brief Regresa una rola de la base de datos.

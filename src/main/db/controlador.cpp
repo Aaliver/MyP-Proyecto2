@@ -18,8 +18,9 @@ void Controlador::minar() {
   std::unordered_set<std::string> artistas = artistaDao.getArtistasNames();
   Elementos elementos = Minero::mina(ruta, rolas, albums, artistas);
   artistaDao.addArtistas(elementos.artistasNuevos);
-  std::unordered_map<std::string, int> albumsNuevos = albumDao.addAlbums(elementos.albumsNuevos);
-  rolaDao.addRolas(elementos.rolasNuevas);
+  for (const auto& [path, id_album]: albumDao.addAlbums(elementos.albumsNuevos))
+    albums[path] = id_album;
+  rolaDao.addRolas(elementos.rolasNuevas, albums);
   actualizaRolas(rolaDao.getRolas());
 }
 

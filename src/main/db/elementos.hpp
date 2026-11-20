@@ -7,9 +7,9 @@
 
 #include <vector>
 
-#include "rola.hpp"
 #include "album.hpp"
 #include "artista.hpp"
+#include "rola_nueva.hpp"
 
 /**
  * @struct Elementos
@@ -20,7 +20,7 @@ struct Elementos {
   /**
    * @brief Las rolas nuevas.
    */
-  std::vector<Rola> rolasNuevas;
+  std::vector<RolaNueva> rolasNuevas;
 
   /**
    * @brief Los albums nuevos.

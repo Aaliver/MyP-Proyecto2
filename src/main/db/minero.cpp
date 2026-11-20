@@ -6,20 +6,25 @@
 #include "album.hpp"
 #include "artista.hpp"
 #include "rola.hpp"
+#include "rola_nueva.hpp"
 
 namespace fs = std::filesystem;
 
 namespace {
   constexpr bool utf8 = true;
 
-  void nuevaRola(TagLib::FileRef& file, std::string& ruta, std::vector<Rola>& rolas) {
+  void nuevaRola(TagLib::FileRef& file, std::string& ruta, std::string& directorio,
+		 std::vector<RolaNueva>& rolas) {
     Rola rola;
     rola.setPath(ruta);
     rola.setTitle(file.tag()->title().to8Bit(utf8));
     rola.setTrack(file.tag()->track());
     rola.setYear(file.tag()->year());
     rola.setGenre(file.tag()->genre().to8Bit(utf8));
-    rolas.push_back(rola);
+    RolaNueva rolaNueva;
+    rolaNueva.rola = rola;
+    rolaNueva.albumPath = directorio;
+    rolas.push_back(rolaNueva);
   }
 
   void nuevoAlbum(TagLib::FileRef& file, std::string& directorio,
@@ -44,7 +49,7 @@ namespace {
     TagLib::FileRef file(ruta.c_str());
     if (file.isNull() || file.tag() == nullptr)
       return;
-    nuevaRola(file, ruta, elementos.rolasNuevas);
+    nuevaRola(file, ruta, directorio, elementos.rolasNuevas);
     if (albums.insert({directorio, -1}).second)
       nuevoAlbum(file, directorio, elementos.albumsNuevos);
     std::string artistName = file.tag()->artist().to8Bit(utf8);
