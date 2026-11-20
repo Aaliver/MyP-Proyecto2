@@ -63,15 +63,15 @@ void AlbumDao::deleteAlbum(int id) {
   sqlite3_finalize(stmt);
 }
 
-std::unordered_set<std::string> AlbumDao::getAlbumsPath() const {
+std::unordered_map<std::string, int> AlbumDao::getAlbumsIds() const {
   sqlite3_stmt* stmt;
-  const char* sql = "SELECT path FROM albums;";
+  const char* sql = "SELECT id_album, path FROM albums;";
   if (sqlite3_prepare_v2(conexion, sql, -1, &stmt, nullptr) != SQLITE_OK)
     throw std::runtime_error("Error al preparar la consulta.");
   int rc;
-  std::unordered_set<std::string> albums;
+  std::unordered_map<std::string, int> albums;
   while ((rc = sqlite3_step(stmt)) == SQLITE_ROW)
-    albums.insert(DaoUtils::castString(stmt, 0));
+    albums.insert({DaoUtils::castString(stmt, 1), sqlite3_column_int(stmt, 0)});
   if (rc != SQLITE_DONE)
     DaoUtils::sqliteError(stmt, "Error al completar la consulta.");
   sqlite3_finalize(stmt);

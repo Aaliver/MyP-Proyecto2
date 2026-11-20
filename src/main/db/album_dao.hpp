@@ -5,7 +5,8 @@
 #pragma once
 
 #include <sqlite3.h>
-#include <unordered_set>
+#include <unordered_map>
+#include <vector>
 
 #include "album.hpp"
 
@@ -54,8 +55,10 @@ public:
   void deleteAlbum(int id);
 
   /**
-   * @brief Regresa un conjunto con las rutas de los albums de la base de datos.
-   * @return un conjunto con las rutas de todos los albums.
+   * @brief Regresa un diccionario con los ids de los álbumes de la base de datos.
+   * @return un diccionario con los ids de todos los álbumes.
+   * @details El diccionario usa como llave los paths y como valor los ids de cada
+   *          album en la base de datos.
    */
-  std::unordered_set<std::string> getAlbumsPath() const;
+  std::unordered_map<std::string, int> getAlbumsIds() const;
 };

@@ -1,6 +1,7 @@
 #include "minero.hpp"
 
 #include <unordered_set>
+#include <unordered_map>
 
 #include <fileref.h>
 #include <tag.h>
@@ -41,13 +42,13 @@ namespace {
   }
 
   void nuevoElemento(std::string ruta, std::string directorio, Elementos& elementos,
-		     std::unordered_set<std::string>& albums,
+		     std::unordered_map<std::string, int>& albums,
 		     std::unordered_set<std::string>& artistas) {
     TagLib::FileRef file(ruta.c_str());
     if (file.isNull() || file.tag() == nullptr)
       return;
     nuevaRola(file, ruta, elementos.rolasNuevas);
-    if (albums.insert(directorio).second)
+    if (albums.insert({directorio, -1}).second)
       nuevoAlbum(file, directorio, elementos.albumsNuevos);
     std::string artistName = file.tag()->artist().to8Bit(utf8);
     if (artistas.insert(artistName).second)
@@ -59,7 +60,7 @@ Elementos Minero::mina(std::filesystem::path ruta, const RolaDao& rolaDao,
 		       const AlbumDao& albumDao, const ArtistaDao& artistaDao) {
   Elementos elementos;
   std::unordered_set<std::string> rolas = rolaDao.getRolasPath();
-  std::unordered_set<std::string> albums = albumDao.getAlbumsPath();
+  std::unordered_map<std::string, int> albums = albumDao.getAlbumsIds();
   std::unordered_set<std::string> artistas = artistaDao.getArtistasNames();
 
   try {
