@@ -13,34 +13,30 @@ namespace fs = std::filesystem;
 namespace {
   constexpr bool utf8 = true;
 
-  void nuevaRola(TagLib::FileRef& file, std::string& ruta, std::string& directorio,
-		 std::vector<RolaNueva>& rolas) {
+  Rola nuevaRola(TagLib::FileRef& file, std::string& ruta) {
     Rola rola;
     rola.setPath(ruta);
     rola.setTitle(file.tag()->title().to8Bit(utf8));
     rola.setTrack(file.tag()->track());
     rola.setYear(file.tag()->year());
     rola.setGenre(file.tag()->genre().to8Bit(utf8));
-    RolaNueva rolaNueva;
-    rolaNueva.rola = rola;
-    rolaNueva.albumPath = directorio;
-    rolas.push_back(rolaNueva);
+    return rola;
   }
 
-  void nuevoAlbum(TagLib::FileRef& file, std::string& directorio,
-		  std::vector<Album>& albums) {
+  Album nuevoAlbum(TagLib::FileRef& file, std::string& directorio) {
     Album album;
     album.setPath(directorio);
     album.setName(file.tag()->album().to8Bit(utf8));
     album.setYear(file.tag()->year());
-    albums.push_back(album);
+    return album;
   }
 
-  void nuevoArtista(std::string& name, std::vector<Artista>& artistas) {
+  Artista nuevoArtista(std::string& name) {
     Artista artista;
-    artista.setIdType(2);
+    int unknown = 2;
+    artista.setIdType(unknown);
     artista.setName(name);
-    artistas.push_back(artista);
+    return artista;
   }
 
   void nuevoElemento(std::string ruta, std::string directorio, Elementos& elementos,
@@ -49,12 +45,19 @@ namespace {
     TagLib::FileRef file(ruta.c_str());
     if (file.isNull() || file.tag() == nullptr)
       return;
-    nuevaRola(file, ruta, directorio, elementos.rolasNuevas);
-    if (albums.insert({directorio, -1}).second)
-      nuevoAlbum(file, directorio, elementos.albumsNuevos);
+    RolaNueva nueva;
+    if (albums.insert({directorio, -1}).second) {
+      Album album = nuevoAlbum(file, directorio);
+      nueva.albumPath = directorio;
+      elementos.albumsNuevos.push_back(album);
+    }
     std::string artistName = file.tag()->artist().to8Bit(utf8);
-    if (artistas.insert(artistName).second)
-      nuevoArtista(artistName, elementos.artistasNuevos);
+    if (artistas.insert(artistName).second) {
+      nueva.performerName = artistName;
+      elementos.artistasNuevos.push_back(nuevoArtista(artistName));
+    }
+    nueva.rola = nuevaRola(file, ruta);
+    elementos.rolasNuevas.push_back(nueva);
   }
 }
 

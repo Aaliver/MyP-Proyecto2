@@ -23,4 +23,9 @@ struct RolaNueva {
    * @brief La ruta del álbum de la rola nueva.
    */
   std::string albumPath;
+
+  /**
+   * @brief El nombre del artista de la rola nueva.
+   */
+  std::string performerName;
 };
