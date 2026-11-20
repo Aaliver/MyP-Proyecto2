@@ -21,6 +21,7 @@ ToolBar {
 		openEditor(EditDialog.Edit.Rola,
 			   [
 			       { name: "Título", display: "title" },
+			       { name: "Artista", display: "performer" },
 			       { name: "Album", display: "album" },
 			       { name: "Año", display: "year" },
 			       { name: "Género", display: "genre" }

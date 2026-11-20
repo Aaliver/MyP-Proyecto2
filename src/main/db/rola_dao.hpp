@@ -50,9 +50,9 @@ public:
 
   /**
    * @brief Actualiza una rola en la base de datos.
-   * @param rola la rola a actualizar.
+   * @param vista la visulización de la rola a actualizar.
    */
-  void updateRola(const Rola& rola);
+  void updateRola(const VistaRola& vista);
 
   /**
    * @brief Elimina una rola de la base de datos.

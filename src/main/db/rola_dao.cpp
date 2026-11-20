@@ -47,19 +47,19 @@ Rola RolaDao::getRola(int id) const {
   return rola;
 }
 
-void RolaDao::updateRola(const Rola& rola) {
+void RolaDao::updateRola(const VistaRola& vista) {
   sqlite3_stmt* stmt;
-  const char* sql = "UPDATE rolas SET id_performer = ?, id_album = ?, path = ?, title = ?, track = ?, year = ?, genre = ? WHERE id_rola = ?;";
+  const char* sql = "UPDATE rolas AS r SET id_performer = p.id_performer, id_album = a.id_album, path = ?, title = ?, track = ?, year = ?, genre = ? FROM performers p, albums a WHERE r.id_rola = ? AND p.name = ? AND a.name = ? ;";
   if (sqlite3_prepare_v2(conexion, sql, -1, &stmt, nullptr) != SQLITE_OK)
     throw std::runtime_error("Error al preparar la consulta.");
-  sqlite3_bind_int(stmt, 1, rola.getArtistId());
-  sqlite3_bind_int(stmt, 2, rola.getAlbumId());
-  sqlite3_bind_text(stmt, 3, rola.getPath().c_str(), -1, SQLITE_TRANSIENT);
-  sqlite3_bind_text(stmt, 4, rola.getTitle().c_str(), -1, SQLITE_TRANSIENT);
-  sqlite3_bind_int(stmt, 5, rola.getTrack());
-  sqlite3_bind_int(stmt, 6, rola.getYear());
-  sqlite3_bind_text(stmt, 7, rola.getGenre().c_str(), -1, SQLITE_TRANSIENT);
-  sqlite3_bind_int(stmt, 8, rola.getRolaId());
+  sqlite3_bind_text(stmt, 1, vista.rola.getPath().c_str(), -1, SQLITE_TRANSIENT);
+  sqlite3_bind_text(stmt, 2, vista.rola.getTitle().c_str(), -1, SQLITE_TRANSIENT);
+  sqlite3_bind_int(stmt, 3, vista.rola.getTrack());
+  sqlite3_bind_int(stmt, 4, vista.rola.getYear());
+  sqlite3_bind_text(stmt, 5, vista.rola.getGenre().c_str(), -1, SQLITE_TRANSIENT);
+  sqlite3_bind_int(stmt, 6, vista.rola.getRolaId());
+  sqlite3_bind_text(stmt, 7, vista.artista.c_str(), -1, SQLITE_TRANSIENT);
+  sqlite3_bind_text(stmt, 8, vista.album.c_str(), -1, SQLITE_TRANSIENT);
   if (sqlite3_step(stmt) != SQLITE_DONE)
     DaoUtils::sqliteError(stmt, "Error al actualizar el registro.");
   sqlite3_finalize(stmt);

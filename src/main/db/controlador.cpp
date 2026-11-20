@@ -53,7 +53,11 @@ void Controlador::actualizaRola(const QVariantMap& datos) {
   rola.setTrack(datos["track"].toInt());
   rola.setYear(datos["year"].toInt());
   rola.setGenre(datos["genre"].toString().toStdString());
-  rolaDao.updateRola(rola);
+  VistaRola vista;
+  vista.rola = rola;
+  vista.album = datos["album"].toString().toStdString();
+  vista.artista = datos["performer"].toString().toStdString();
+  rolaDao.updateRola(vista);
   actualizaRolas(rolaDao.getRolasView());
 }
 
