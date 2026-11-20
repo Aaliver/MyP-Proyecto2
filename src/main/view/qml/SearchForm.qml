@@ -90,4 +90,9 @@ Dialog {
         }
         searchData(values)
     }
+
+    onClosed: {
+        for (let i = 0; i < searchModel.count; ++i)
+	    searchModel.get(i).search = ""
+    }
 }
