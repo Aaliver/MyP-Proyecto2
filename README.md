@@ -6,7 +6,7 @@ Se requiere tener instalados:
 
 + C++17
 + Qt6
-+ SQLite3
++ SQLite3 3.33.0
 + Meson
 + Ninja
 + Doxygen (opcional para generar la documentación)
