@@ -170,38 +170,39 @@ componentes principales:
 Recorre un directorio arbitrario para identificar y leer los datos de los
 archivos .mp3 que este contiene.
 
-Para lograr esto primero se obtiene toda la información que ya se tiene
-localmente en \texttt{base\_datos.db} (es decir, las rolas, los álbumes y los
-artistas) y se agrega la nueva información del directorio sin repetirla.
+Para ello, primero se obtiene toda la información que ya se tiene localmente en
+\texttt{base\_datos.db} (canciones, álbumes y artistas). Luego, se compara con
+la nueva información extraida del directorio y se almacena la faltante en
+objetos que los DAOs corresppndientes recibiran para agregarlos a la base de datos.
 
 \subsection{La Interfaz}
 
-La vista, capaz de mostrar la información de la base de datos y modificarla sin
-alterar los archivos originales.
+Muestra la información de la base de datos y permite modificarla sin alterar los
+archivos originales en el directorio.
 
 Cuenta con botones para minar el directorio, editar y reproducir una canción,
 así como deslizadores para cambiar el volumen y la posición de la canción.
 
-Para filtrar existe una barra de búsqueda junto a la vista principal: una tabla
-que muestra todas las rolas en la base de datos..
+Incluye un pequeño formulario de buscar que permite filtar por cada campo
+mostrado de una canción: título, artista, álbum, año y género. Seleccionar una
+canción permite eliminarla o abrir un formulario donde editarla, según el
+botón seleccionado.
 
 \subsection{La Base de Datos}
 
-El motor que se encarga de guardar toda la información extraída de los .mp3 en
+El motor encargado de guardar toda la información extraída de los .mp3 en
 el archivo \texttt{base\_datos.db}. Esta se puede modificar de acuerdo a los cambios
 realizados por el usuario desde la interfaz.
 
-Para crearla y modificarla nos apoyamos de objetos que representaran a las
-rolas, los álbumes y los artistas, así como de sus respectivos DAOs para obtener
-y modificar la información de la base de datos.
+Para mantenerla se tiene un objeto que unicamente gestiona la conexión y para
+modificarla se usan objetos que representaran a las canciones, álbumes y
+artistas, así como sus respectivos DAOs para obtener y modificar la información
+de la base de datos.
 
 \subsection{El Mini Compilador}
 
-Un pequeño intérprete de comandos capaz de permitir búsquedas en la base de
-datos sin que el usuario escriba SQL.
-
-Es capaz de realizar búsquedas básicas por las propiedades de las rolas, los
-álbumes o los artistas.
+Se omitio por falta de tiempo y en su lugar se implementó el formulario de búsqueda
+mencionado de la interfaz.
 
 \section{Diseño}
 
