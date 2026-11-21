@@ -206,7 +206,103 @@ mencionado de la interfaz.
 
 \section{Diseño}
 
+El programa inicia su ejecución con un método main que solo se encarga de
+atrapar las expeciones, mostrar los mensajes de error e iniciar la Aplicación.
 
+\crc{Aplicacion}{
+  \item Válida los argumentos de entrada del programa.
+  \item Carga el controlador y la interfáz gráfica.
+}{
+  \item Controlador
+}
+
+El \texttt{Controlador} es el objeto que se encarga de gestionar las acciones
+principales del programa. Recibe los datos de la vista y manda a llamar a los
+métodos necesarios para llevar a cabo las acciones solicitadas por el usuario.
+
+\crc{Controlador}{
+  \item Inicia la base de datos.
+  \item Maneja los DAOs.
+  \item Recibe y envia información a la interfaz.
+}{
+  \item «namespace» Minero
+  \item BaseDeDatos
+  \item RolaDao
+  \item AlbumDao
+  \item ArtistaDao
+}
+
+El espacio de nombres \texttt{Minero} tiene una única función para minar el
+directorio elegido por el usuario. Su trabajo es recorrer el directorio y
+comparar la información obtenida de el con la que ya pertenece a la base de
+datos para obtener todas las canciones, álbumes y artistas faltantes. Estos
+objetos se guardan en la estructura \texttt{Elementos} y son manejados por los
+DAOs correspondientes.
+
+La clase \texttt{BaseDeDatos} tiene una única función: manejar la conexión de la
+base de datos. De esta forma, el \texttt{Controlador} nunca conoce la conexión y
+los DAOs solo interactuan con la conexión al realizar consultas.
+
+\crc{BaseDeDatos}{
+  \item Crea el archivo \texttt{base\_datos.db} si no existe.
+  \item Maneja la conexión de la base de datos.
+}{
+  \item N/A
+}
+
+El DAO de las canciones realiza todas las consultas SQL referentes a las
+canciones. Es decir, se encarga de añadir, obtener, actualizar, eliminar y
+buscar canciones.
+
+\crc{RolaDao}{
+  \item Realiza las consultas SQL de las canciones.
+  \item Obtiene y modifica los datos de las canciones en la base de datos.
+}{
+  \item Rola
+  \item «struct» RolaNueva
+  \item «struct» VistaRola
+  \item «struct» ParamRola
+}
+
+Las estructuras colaboradoras de \texttt{RolaDao} son objetos que guardan datos
+relacionados con la información de las canciones.
+
+Una \texttt{Rola} guarda todos los datos de una canción perteneciente a la tabla
+SQL \texttt{rolas}. Una \texttt{RolaNueva} envuelve una \texttt{Rola} y guarda
+la ruta del álbum y el nombre del artista, información extra requerida
+para relacionar una canción con otras tablas SQL. De manera similar, una
+\texttt{VistaRola} guarda adicionalemente el nombre del album y del artista como
+la información que se muestra al usuario.
+
+Por otro lado, una \texttt{ParamRola} guarda todos los parámetros (opcionales) por
+los que se puede buscar una canción: título, año, genéro, álbum y artista.
+
+Continuando con los DAOs faltantes, \texttt{AlbumDao} y \texttt{ArtistaDao},
+como las responsabilidades de ambos son similares, nos limitaremos a mostrar la
+tarjeta CRC del DAO de los álbumes.
+
+\crc{AlbumDao}{
+  \item Realiza las consultas SQL de los álbumes.
+  \item Obtiene y modifica los datos de los álbumes en la base de datos.
+}{
+  \item Album
+  \item «namespace» DaoUtils
+}
+
+De manera similar a una \texttt{Rola}, un \texttt{Album} guarda los datos de un
+album en la tabla SQL \texttt{albums} y un \texttt{Artista} guarda los datos de
+un artista en la tabla SQL \texttt{performers}.
+
+Ambos DAOs se apoyan del espacio de nombres \texttt{DaoUtils} que tiene
+funciones auxiliares para las consultas SQL.
+
+Por su parte, la interfaz se compone de cuatro objetos principales: la ventana
+principal (\texttt{Main}) donde se muestra la aplicación, el encabezado
+(\texttt{HeaderBar}) con los botones principales, el pie (\texttt{FooterBar})
+con los controles para reproducir una canción y el cuerpo de la ventana
+(\texttt{Body}) que muestra la información de las canciones en la base de
+datos. Estos componentes interactuan con los método expuestos en el
+\texttt{Controlador}.
 
 \section{Implementación}
 
