@@ -1,5 +1,5 @@
 <!DOCTYPE RCC><RCC version="1.0">
-<qresource prefix="/img">
+  <qresource prefix="/img">
     <file>images/pickaxe.png</file>
     <file>images/edit.svg</file>
     <file>images/pen.svg</file>
@@ -10,5 +10,5 @@
     <file>images/volume-mute.svg</file>
     <file>images/volume-low.svg</file>
     <file>images/volume-high.svg</file>
-</qresource>
+  </qresource>
 </RCC>

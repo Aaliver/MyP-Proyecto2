@@ -15,74 +15,74 @@ Dialog {
     signal searchData(var values)
 
     ListModel {
-	id: searchModel
-	ListElement { name: "Título"; field: "title"; search: "" }
-	ListElement { name: "Álbum"; field: "album"; search: "" }
-	ListElement { name: "Artista"; field: "performer"; search: "" }
-	ListElement { name: "Año"; field: "year"; search: "" }
-	ListElement { name: "Género"; field: "genre"; search: "" }
+        id: searchModel
+        ListElement { name: "Título"; field: "title"; search: "" }
+        ListElement { name: "Álbum"; field: "album"; search: "" }
+        ListElement { name: "Artista"; field: "performer"; search: "" }
+        ListElement { name: "Año"; field: "year"; search: "" }
+        ListElement { name: "Género"; field: "genre"; search: "" }
     }
 
     Loader {
-	anchors.fill: parent
-	active: searchForm.visible
-	sourceComponent: component
+        anchors.fill: parent
+        active: searchForm.visible
+        sourceComponent: component
     }
 
     Component {
-	id: component
+        id: component
 
-	ListView {
-	    id: dataSearch
-	    anchors.fill: parent
-	    spacing: 5
-	    clip: true
+        ListView {
+            id: dataSearch
+            anchors.fill: parent
+            spacing: 5
+            clip: true
 
-	    model: searchModel
+            model: searchModel
 
-	    delegate: Rectangle {
-		id: listViewDelegate
-		height: 50
-		width: parent.width
-		color: palette.midlight
-		border.width: 0
-		border.color: Material.accent
-		radius: 5
+            delegate: Rectangle {
+                id: listViewDelegate
+                height: 50
+                width: parent.width
+                color: palette.midlight
+                border.width: 0
+                border.color: Material.accent
+                radius: 5
 
-		RowLayout {
-		    id: row
-		    anchors.left: parent.left
+                RowLayout {
+                    id: row
+                    anchors.left: parent.left
                     anchors.right: parent.right
-		    anchors.verticalCenter: parent.verticalCenter
+                    anchors.verticalCenter: parent.verticalCenter
                     anchors.margins: 5
 
-		    TextField {
-			Layout.fillWidth: true
-			Layout.fillHeight: true
+                    TextField {
+                        Layout.fillWidth: true
+                        Layout.fillHeight: true
 
-			font.pixelSize: 15
-			placeholderText: model.name
-			color: palette.text
+                        font.pixelSize: 15
+                        placeholderText: model.name
+                        color: palette.text
 
-			background: Rectangle {
-			    color: palette.midlight
-			}
+                        background: Rectangle {
+                            color: palette.midlight
+                        }
 
-			onActiveFocusChanged: {
-			    listViewDelegate.border.width = activeFocus ? 2 : 0
-			}
+                        onActiveFocusChanged: {
+                            listViewDelegate.border.width = activeFocus ? 2 : 0
+                        }
 
-			onTextEdited: {
-			    searchModel.setProperty(index, "search", text)
-			}
+                        onTextEdited: {
+                            searchModel.setProperty(index, "search", text)
+                        }
                     }
-		}
+                }
             }
-	}
+        }
     }
 
     onAccepted: {
-	let values = {}
+        let values = {}
         for (let i = 0; i < searchModel.count; ++i) {
             let element = searchModel.get(i)
             if (element.search.trim() !== "")
@@ -93,6 +93,6 @@ Dialog {
 
     onClosed: {
         for (let i = 0; i < searchModel.count; ++i)
-	    searchModel.get(i).search = ""
+            searchModel.get(i).search = ""
     }
 }

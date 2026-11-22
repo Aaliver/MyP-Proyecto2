@@ -1,5 +1,5 @@
 <!DOCTYPE RCC><RCC version="1.0">
-<qresource prefix="/">
+  <qresource prefix="/">
     <file>qml/Main.qml</file>
     <file>qml/Boton.qml</file>
     <file>qml/HeaderBar.qml</file>
@@ -7,5 +7,5 @@
     <file>qml/SearchForm.qml</file>
     <file>qml/Body.qml</file>
     <file>qml/FooterBar.qml</file>
-</qresource>
+  </qresource>
 </RCC>

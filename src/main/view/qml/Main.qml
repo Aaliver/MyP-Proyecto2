@@ -15,12 +15,12 @@ ApplicationWindow {
     Material.accent: Material.Indigo
 
     header: HeaderBar {
-	selectedData: body.dataRow
+        selectedData: body.dataRow
     }
 
     Body { id: body }
 
     footer: FooterBar {
-	selectedRola: body.dataRow
+        selectedRola: body.dataRow
     }
 }

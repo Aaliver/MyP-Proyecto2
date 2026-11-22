@@ -17,101 +17,101 @@ Dialog {
 
     property int edit: EditDialog.Edit.Default
     enum Edit {
-	Rola,
-	Album,
-	Artist,
-	Default
+        Rola,
+        Album,
+        Artist,
+        Default
     }
 
     signal saveData(int editType, var values)
 
     Loader {
-	anchors.fill: parent
-	active: editDialog.visible
-	sourceComponent: component
+        anchors.fill: parent
+        active: editDialog.visible
+        sourceComponent: component
     }
 
     Component {
-	id: component
-	ListView {
-	    id: dataView
-	    anchors.fill: parent
-	    spacing: 5
-	    clip: true
+        id: component
+        ListView {
+            id: dataView
+            anchors.fill: parent
+            spacing: 5
+            clip: true
 
-	    model: editDialog.fields
+            model: editDialog.fields
 
-	    delegate: Rectangle {
-		height: 45
-		width: parent.width
-		color: palette.midlight
-		radius: 5
+            delegate: Rectangle {
+                height: 45
+                width: parent.width
+                color: palette.midlight
+                radius: 5
 
-		RowLayout {
-		    id: row
-		    anchors.left: parent.left
+                RowLayout {
+                    id: row
+                    anchors.left: parent.left
                     anchors.right: parent.right
-		    anchors.verticalCenter: parent.verticalCenter
+                    anchors.verticalCenter: parent.verticalCenter
                     anchors.margins: 15
                     spacing: 15
 
-		    property bool editing: false
-		    property string editValue: editDialog.editData != null ?
-			editDialog.editData[modelData.display] : ""
+                    property bool editing: false
+                    property string editValue: editDialog.editData != null ?
+                        editDialog.editData[modelData.display] : ""
 
                     Text {
-			text: modelData.name + ":"
-			color: edit.Material.accent
-			font.bold: true
+                        text: modelData.name + ":"
+                        color: edit.Material.accent
+                        font.bold: true
                     }
 
-		    Text {
-			id: textView
-			text: row.editValue
-			Layout.leftMargin: 16
-			color: palette.text
-			visible: !row.editing
-		    }
-
-		    TextField {
-			id: textEdit
-			Layout.preferredWidth: 150
-			Layout.fillHeight: parent.height
-
-			text: row.editValue
-			color: "#d0d0d0"
-			visible: row.editing
-
-			background: Rectangle {
-			    color: palette.midlight
-			}
-
-			onTextEdited: {
-			    editDialog.editData[modelData.display] = text
-			}
+                    Text {
+                        id: textView
+                        text: row.editValue
+                        Layout.leftMargin: 16
+                        color: palette.text
+                        visible: !row.editing
                     }
 
-		    Item {
-			Layout.fillWidth: true
-		    }
+                    TextField {
+                        id: textEdit
+                        Layout.preferredWidth: 150
+                        Layout.fillHeight: parent.height
+
+                        text: row.editValue
+                        color: "#d0d0d0"
+                        visible: row.editing
+
+                        background: Rectangle {
+                            color: palette.midlight
+                        }
+
+                        onTextEdited: {
+                            editDialog.editData[modelData.display] = text
+                        }
+                    }
+
+                    Item {
+                        Layout.fillWidth: true
+                    }
 
                     Boton {
-			id: edit
-			Layout.preferredWidth: 40
-			Layout.preferredHeight: 40
-			iconSource: "qrc:/img/images/pen.svg"
+                        id: edit
+                        Layout.preferredWidth: 40
+                        Layout.preferredHeight: 40
+                        iconSource: "qrc:/img/images/pen.svg"
 
-			onClicked: {
-			    textEdit.forceActiveFocus()
-			    row.editing = true
-			}
+                        onClicked: {
+                            textEdit.forceActiveFocus()
+                            row.editing = true
+                        }
                     }
-		}
+                }
             }
-	}
+        }
     }
 
     onAccepted: {
-	saveData(edit, editData)
+        saveData(edit, editData)
     }
 }

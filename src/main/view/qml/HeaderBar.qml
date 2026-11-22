@@ -11,92 +11,92 @@ ToolBar {
     property var selectedData: null
 
     Boton {
-	id: editButton
-	width: 45
+        id: editButton
+        width: 45
         height: 45
-	anchors.left: parent.left
-	anchors.leftMargin: 10
-	iconSource: "qrc:/img/images/edit.svg"
-	icon.color: "transparent"
-	onClicked: {
-	    if (headerBar.selectedData !== null) {
-		openEditor(EditDialog.Edit.Rola,
-			   [
-			       { name: "Título", display: "title" },
-			       { name: "Artista", display: "performer" },
-			       { name: "Album", display: "album" },
-			       { name: "Año", display: "year" },
-			       { name: "Género", display: "genre" }
-			   ])
-	    }
-	}
+        anchors.left: parent.left
+        anchors.leftMargin: 10
+        iconSource: "qrc:/img/images/edit.svg"
+        icon.color: "transparent"
+        onClicked: {
+            if (headerBar.selectedData !== null) {
+                openEditor(EditDialog.Edit.Rola,
+                           [
+                               { name: "Título", display: "title" },
+                               { name: "Artista", display: "performer" },
+                               { name: "Album", display: "album" },
+                               { name: "Año", display: "year" },
+                               { name: "Género", display: "genre" }
+                           ])
+            }
+        }
     }
 
     function openEditor(type, fields: var) {
-	editor.edit = type
-	editor.editData = selectedData
-	editor.fields = fields
-	editor.open()
+        editor.edit = type
+        editor.editData = selectedData
+        editor.fields = fields
+        editor.open()
     }
 
     EditDialog {
-	id: editor
+        id: editor
 
-	onSaveData: (editType, values) => {
-	    switch (editType) {
-	    case EditDialog.Edit.Rola:
-		controlador.actualizaRola(values)
-		break
-	    case EditDialog.Edit.Album:
-		controlador.actualizaAlbum(values)
-		break
-	    case EditDialog.Edit.Artist:
-		controlador.actualizaArtista(values)
-		break
-	    default:
-	    }
-	}
+        onSaveData: (editType, values) => {
+            switch (editType) {
+            case EditDialog.Edit.Rola:
+                controlador.actualizaRola(values)
+                break
+            case EditDialog.Edit.Album:
+                controlador.actualizaAlbum(values)
+                break
+            case EditDialog.Edit.Artist:
+                controlador.actualizaArtista(values)
+                break
+            default:
+            }
+        }
     }
 
     Boton {
-	id: deleteButton
-	width: 45
+        id: deleteButton
+        width: 45
         height: 45
-	anchors.left: editButton.right
-	anchors.leftMargin: 10
-	iconSource: "qrc:/img/images/trash.svg"
-	icon.color: "transparent"
-	onClicked: {
-	    if (selectedData !== null)
-		controlador.eliminaRola(selectedData)
-	}
+        anchors.left: editButton.right
+        anchors.leftMargin: 10
+        iconSource: "qrc:/img/images/trash.svg"
+        icon.color: "transparent"
+        onClicked: {
+            if (selectedData !== null)
+                controlador.eliminaRola(selectedData)
+        }
     }
 
     Boton {
-	id: searchButton
-	width: 45
+        id: searchButton
+        width: 45
         height: 45
-	anchors.right: mineButton.left
-	anchors.rightMargin: 10
-	iconSource: "qrc:/img/images/form.svg"
-	icon.color: "transparent"
-	onClicked: search.open()
+        anchors.right: mineButton.left
+        anchors.rightMargin: 10
+        iconSource: "qrc:/img/images/form.svg"
+        icon.color: "transparent"
+        onClicked: search.open()
     }
 
     SearchForm {
-	id: search
+        id: search
 
-	onSearchData: (values) => { controlador.buscaRolas(values) }
+        onSearchData: (values) => { controlador.buscaRolas(values) }
     }
 
     Boton {
-	id: mineButton
-	width: 45
+        id: mineButton
+        width: 45
         height: 45
-	anchors.right: parent.right
-	anchors.rightMargin: 10
-	iconSource: "qrc:/img/images/pickaxe.png"
-	icon.color: "transparent"
-	onClicked: controlador.minar()
+        anchors.right: parent.right
+        anchors.rightMargin: 10
+        iconSource: "qrc:/img/images/pickaxe.png"
+        icon.color: "transparent"
+        onClicked: controlador.minar()
     }
 }

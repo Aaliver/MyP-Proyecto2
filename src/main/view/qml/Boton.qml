@@ -10,20 +10,20 @@ Button {
     highlighted: true
 
     contentItem: Item {
-	anchors.fill: parent
+        anchors.fill: parent
 
-	Text {
-	    visible: button.iconSource == ""
+        Text {
+            visible: button.iconSource == ""
             text: button.text
             font: button.font
-	    color: button.Material.foreground
-	    anchors.centerIn: parent
+            color: button.Material.foreground
+            anchors.centerIn: parent
             elide: Text.ElideRight
-	}
+        }
 
-	Image {
-	    readonly property bool isSvg:
-	    source.toString().toLowerCase().endsWith(".svg")
+        Image {
+            readonly property bool isSvg:
+            source.toString().toLowerCase().endsWith(".svg")
 
             visible: button.iconSource != ""
             source: button.iconSource
@@ -31,8 +31,8 @@ Button {
             anchors.centerIn: parent
             width: parent.width * (isSvg ? 0.4 : 0.6)
             height: parent.height * (isSvg ? 0.4 : 0.6)
-	    sourceSize.width: isSvg ? width : 0
-	    sourceSize.height: isSvg ? height : 0
+            sourceSize.width: isSvg ? width : 0
+            sourceSize.height: isSvg ? height : 0
         }
     }
 }
