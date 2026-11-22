@@ -1,11 +1,13 @@
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Controls.Material
+import QtQuick.Layouts
 
 ToolBar {
     id: headerBar
     height: 50
 
+    Material.accent: Material.BlueGrey
     property var selectedData: null
 
     Boton {

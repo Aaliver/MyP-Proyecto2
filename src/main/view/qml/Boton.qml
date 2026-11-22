@@ -7,7 +7,6 @@ Button {
     height: 40
 
     property url iconSource: ""
-    Material.accent: Material.BlueGrey
     highlighted: true
 
     contentItem: Item {
