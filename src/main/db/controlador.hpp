@@ -54,6 +54,7 @@ public:
   /**
    * @brief El constructor.
    * @param ruta la ruta del directorio donde obtener los datos de la base de datos.
+   * @param parent el objeto padre.
    */
   explicit Controlador(std::filesystem::path ruta, QObject* parent = nullptr);
 
