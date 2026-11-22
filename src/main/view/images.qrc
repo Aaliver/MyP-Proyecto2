@@ -1,7 +1,7 @@
 <!DOCTYPE RCC><RCC version="1.0">
 <qresource prefix="/img">
     <file>images/pickaxe.png</file>
-    <file>images/edit.png</file>
+    <file>images/edit.svg</file>
     <file>images/pen.svg</file>
     <file>images/trash.svg</file>
     <file>images/form.svg</file>

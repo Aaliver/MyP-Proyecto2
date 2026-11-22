@@ -16,7 +16,7 @@ ToolBar {
         height: 45
 	anchors.left: parent.left
 	anchors.leftMargin: 10
-	iconSource: "qrc:/img/images/edit.png"
+	iconSource: "qrc:/img/images/edit.svg"
 	icon.color: "transparent"
 	onClicked: {
 	    if (headerBar.selectedData !== null) {
