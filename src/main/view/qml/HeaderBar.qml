@@ -59,10 +59,20 @@ ToolBar {
     }
 
     Boton {
-        id: deleteButton
+        id: addButton
         width: 45
         height: 45
         anchors.left: editButton.right
+        anchors.leftMargin: 10
+        iconSource: "qrc:/img/images/add.svg"
+        icon.color: "transparent"
+    }
+
+    Boton {
+        id: deleteButton
+        width: 45
+        height: 45
+        anchors.left: addButton.right
         anchors.leftMargin: 10
         iconSource: "qrc:/img/images/trash.svg"
         icon.color: "transparent"
