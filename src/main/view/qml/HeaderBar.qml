@@ -16,7 +16,7 @@ ToolBar {
         height: 45
         anchors.left: parent.left
         anchors.leftMargin: 10
-        iconSource: "qrc:/img/images/edit.svg"
+        icon.source: "qrc:/img/images/edit.svg"
         icon.color: "transparent"
         onClicked: {
             if (headerBar.selectedData !== null) {
@@ -64,7 +64,7 @@ ToolBar {
         height: 45
         anchors.left: editButton.right
         anchors.leftMargin: 10
-        iconSource: "qrc:/img/images/add.svg"
+        icon.source: "qrc:/img/images/add.svg"
         icon.color: "transparent"
     }
 
@@ -74,7 +74,7 @@ ToolBar {
         height: 45
         anchors.left: addButton.right
         anchors.leftMargin: 10
-        iconSource: "qrc:/img/images/trash.svg"
+        icon.source: "qrc:/img/images/trash.svg"
         icon.color: "transparent"
         onClicked: {
             if (selectedData !== null)
@@ -88,7 +88,7 @@ ToolBar {
         height: 45
         anchors.right: mineButton.left
         anchors.rightMargin: 10
-        iconSource: "qrc:/img/images/form.svg"
+        icon.source: "qrc:/img/images/form.svg"
         icon.color: "transparent"
         onClicked: search.open()
     }
@@ -105,7 +105,7 @@ ToolBar {
         height: 45
         anchors.right: parent.right
         anchors.rightMargin: 10
-        iconSource: "qrc:/img/images/pickaxe.png"
+        icon.source: "qrc:/img/images/pickaxe.png"
         icon.color: "transparent"
         onClicked: controlador.minar()
     }

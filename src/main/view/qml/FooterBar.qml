@@ -74,7 +74,7 @@ ToolBar {
         id: musicButton
         height: 70
         anchors.centerIn: parent
-        iconSource: player.playing ?
+        icon.source: player.playing ?
             "qrc:/img/images/pause.png" : "qrc:/img/images/play.png"
         background: null
 

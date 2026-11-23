@@ -6,14 +6,14 @@ Button {
     width: 100
     height: 40
 
-    property url iconSource: ""
+    icon.source: ""
     highlighted: true
 
     contentItem: Item {
         anchors.fill: parent
 
         Text {
-            visible: button.iconSource == ""
+            visible: button.icon.source == ""
             text: button.text
             font: button.font
             color: button.Material.foreground
@@ -25,8 +25,8 @@ Button {
             readonly property bool isSvg:
             source.toString().toLowerCase().endsWith(".svg")
 
-            visible: button.iconSource != ""
-            source: button.iconSource
+            visible: button.icon.source != ""
+            source: button.icon.source
             fillMode: Image.PreserveAspectFit
             anchors.centerIn: parent
             width: parent.width * (isSvg ? 0.4 : 0.6)

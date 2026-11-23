@@ -99,7 +99,7 @@ Dialog {
                         id: edit
                         Layout.preferredWidth: 40
                         Layout.preferredHeight: 40
-                        iconSource: "qrc:/img/images/pen.svg"
+                        icon.source: "qrc:/img/images/pen.svg"
 
                         onClicked: {
                             textEdit.forceActiveFocus()
