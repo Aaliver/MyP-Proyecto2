@@ -14,6 +14,7 @@
 #include "album_dao.hpp"
 #include "artista_dao.hpp"
 #include "base_datos.hpp"
+#include "persona_dao.hpp"
 #include "rola_dao.hpp"
 #include "vista_rola.hpp"
 
@@ -42,6 +43,8 @@ private:
   AlbumDao albumDao;
   /* El dao de los artistas. */
   ArtistaDao artistaDao;
+  /* El dao de las personas. */
+  PersonaDao personaDao;
 
   /* Las rolas de la base de datos. */
   QVariantList rolas;
@@ -80,6 +83,12 @@ public:
    * @param datos los datos del artista a actualizar.
    */
   Q_INVOKABLE void actualizaArtista(const QVariantMap& datos);
+
+  /**
+   * @brief Añade una persona a la base de datos.
+   * @param datos los datos de la persona a agregar.
+   */
+  Q_INVOKABLE void addPersona(const QVariantMap& datos);
 
   /**
    * @brief Elimina una rola de la base de datos.
