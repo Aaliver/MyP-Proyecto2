@@ -72,6 +72,7 @@ ToolBar {
 
     Boton {
         id: musicButton
+        width: 70
         height: 70
         anchors.centerIn: parent
         icon.source: player.playing ?

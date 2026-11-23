@@ -12,8 +12,6 @@ ToolBar {
 
     Boton {
         id: editButton
-        width: 45
-        height: 45
         anchors.left: parent.left
         anchors.leftMargin: 10
         icon.source: "qrc:/img/images/edit.svg"
@@ -60,8 +58,6 @@ ToolBar {
 
     Boton {
         id: addButton
-        width: 45
-        height: 45
         anchors.left: editButton.right
         anchors.leftMargin: 10
         icon.source: "qrc:/img/images/add.svg"
@@ -70,8 +66,6 @@ ToolBar {
 
     Boton {
         id: deleteButton
-        width: 45
-        height: 45
         anchors.left: addButton.right
         anchors.leftMargin: 10
         icon.source: "qrc:/img/images/trash.svg"
@@ -84,8 +78,6 @@ ToolBar {
 
     Boton {
         id: searchButton
-        width: 45
-        height: 45
         anchors.right: mineButton.left
         anchors.rightMargin: 10
         icon.source: "qrc:/img/images/form.svg"
@@ -101,8 +93,6 @@ ToolBar {
 
     Boton {
         id: mineButton
-        width: 45
-        height: 45
         anchors.right: parent.right
         anchors.rightMargin: 10
         icon.source: "qrc:/img/images/pickaxe.png"

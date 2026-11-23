@@ -3,8 +3,8 @@ import QtQuick.Controls.Material
 
 Button {
     id: button
-    width: 100
-    height: 40
+    width: 45
+    height: 45
 
     icon.source: ""
     highlighted: true
