@@ -8,6 +8,7 @@ db_sources = files(
     'artista.cpp',
     'artista_dao.cpp',
     'persona.cpp',
+    'persona_dao.cpp',
     'dao_utils.cpp',
     'base_datos.cpp',
     'controlador.cpp',
