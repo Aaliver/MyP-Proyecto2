@@ -14,7 +14,7 @@ void PersonaDao::addPersona(const Persona& persona) {
   sqlite3_bind_text(stmt, 3, persona.getBirthDate().c_str(), -1, SQLITE_TRANSIENT);
   sqlite3_bind_text(stmt, 4, persona.getDeathDate().c_str(), -1, SQLITE_TRANSIENT);
   if (sqlite3_step(stmt) != SQLITE_DONE)
-    DaoUtils::sqliteError(stmt, "Error al añadir el artista.");
+    DaoUtils::sqliteError(stmt, "Error al añadir la persona.");
   sqlite3_finalize(stmt);
 }
 
@@ -25,7 +25,7 @@ Persona PersonaDao::getPersona(int id) const {
     throw std::runtime_error("Error al preparar la consulta.");
   sqlite3_bind_int(stmt, 1, id);
   if (sqlite3_step(stmt) != SQLITE_ROW)
-    DaoUtils::sqliteError(stmt, "Error al obtener el registro.");
+    DaoUtils::sqliteError(stmt, "Error al obtener la persona.");
   Persona persona;
   persona.setStageName(DaoUtils::castString(stmt, 0));
   persona.setRealName(DaoUtils::castString(stmt, 1));
@@ -45,7 +45,7 @@ void PersonaDao::updatePersona(const Persona& persona) {
   sqlite3_bind_text(stmt, 3, persona.getBirthDate().c_str(), -1, SQLITE_TRANSIENT);
   sqlite3_bind_text(stmt, 4, persona.getDeathDate().c_str(), -1, SQLITE_TRANSIENT);
   if (sqlite3_step(stmt) != SQLITE_DONE)
-    DaoUtils::sqliteError(stmt, "Error al actualizar el registro.");
+    DaoUtils::sqliteError(stmt, "Error al actualizar la persona.");
   sqlite3_finalize(stmt);
 }
 
@@ -56,6 +56,6 @@ void PersonaDao::deletePersona(int id) {
     throw std::runtime_error("Error al preparar la consulta.");
   sqlite3_bind_int(stmt, 1, id);
   if (sqlite3_step(stmt) != SQLITE_DONE)
-    DaoUtils::sqliteError(stmt, "Error al eliminar el registro.");
+    DaoUtils::sqliteError(stmt, "Error al eliminar la persona.");
   sqlite3_finalize(stmt);
 }

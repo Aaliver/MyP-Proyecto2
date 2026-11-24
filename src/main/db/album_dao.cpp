@@ -17,7 +17,7 @@ AlbumDao::addAlbums(const std::vector<Album>& albums) {
     sqlite3_bind_text(stmt, 2, album.getName().c_str(), -1, SQLITE_TRANSIENT);
     sqlite3_bind_int(stmt, 3, album.getYear());
     if (sqlite3_step(stmt) != SQLITE_DONE)
-      DaoUtils::sqliteError(stmt, "Error al añadir el registro.");
+      DaoUtils::sqliteError(stmt, "Error al añadir el album.");
     int id = static_cast<int>(sqlite3_last_insert_rowid(conexion));
     albumsAgregados.insert({path, id});
     sqlite3_reset(stmt);
@@ -34,7 +34,7 @@ Album AlbumDao::getAlbum(int id) const {
     throw std::runtime_error("Error al preparar la consulta.");
   sqlite3_bind_int(stmt, 1, id);
   if (sqlite3_step(stmt) != SQLITE_ROW)
-    DaoUtils::sqliteError(stmt, "Error al obtener el registro.");
+    DaoUtils::sqliteError(stmt, "Error al obtener el album.");
   Album album;
   album.setId(id);
   album.setPath(DaoUtils::castString(stmt, 0));
@@ -54,7 +54,7 @@ void AlbumDao::updateAlbum(const Album& album) {
   sqlite3_bind_int(stmt, 3, album.getYear());
   sqlite3_bind_int(stmt, 4, album.getId());
   if (sqlite3_step(stmt) != SQLITE_DONE)
-    DaoUtils::sqliteError(stmt, "Error al actualizar el registro.");
+    DaoUtils::sqliteError(stmt, "Error al actualizar el album.");
   sqlite3_finalize(stmt);
 }
 
@@ -65,7 +65,7 @@ void AlbumDao::deleteAlbum(int id) {
     throw std::runtime_error("Error al preparar la consulta.");
   sqlite3_bind_int(stmt, 1, id);
   if (sqlite3_step(stmt) != SQLITE_DONE)
-    DaoUtils::sqliteError(stmt, "Error al eliminar el registro.");
+    DaoUtils::sqliteError(stmt, "Error al eliminar el album.");
   sqlite3_finalize(stmt);
 }
 

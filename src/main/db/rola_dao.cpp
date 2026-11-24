@@ -5,8 +5,8 @@
 RolaDao::RolaDao(sqlite3* conexion) : conexion(conexion) {}
 
 void RolaDao::addRolas(const std::vector<RolaNueva>& rolas,
-		       std::unordered_map<std::string, int> artistas,
-		       std::unordered_map<std::string, int> albums) {
+                       std::unordered_map<std::string, int> artistas,
+                       std::unordered_map<std::string, int> albums) {
   sqlite3_stmt* stmt;
   const char* sql = "INSERT INTO rolas (id_performer, id_album, path, title, track, year, genre) VALUES (?, ?, ?, ?, ?, ?, ?);";
   if (sqlite3_prepare_v2(conexion, sql, -1, &stmt, nullptr) != SQLITE_OK)
@@ -20,7 +20,7 @@ void RolaDao::addRolas(const std::vector<RolaNueva>& rolas,
     sqlite3_bind_int(stmt, 6, nueva.rola.getYear());
     sqlite3_bind_text(stmt, 7, nueva.rola.getGenre().c_str(), -1, SQLITE_TRANSIENT);
     if (sqlite3_step(stmt) != SQLITE_DONE)
-      DaoUtils::sqliteError(stmt, "Error al añadir el registro.");
+      DaoUtils::sqliteError(stmt, "Error al añadir la rola.");
     sqlite3_reset(stmt);
     sqlite3_clear_bindings(stmt);
   }
@@ -34,7 +34,7 @@ Rola RolaDao::getRola(int id) const {
     throw std::runtime_error("Error al preparar la consulta.");
   sqlite3_bind_int(stmt, 1, id);
   if (sqlite3_step(stmt) != SQLITE_ROW)
-    DaoUtils::sqliteError(stmt, "Error al obtener el registro.");
+    DaoUtils::sqliteError(stmt, "Error al obtener la rola.");
   Rola rola;
   rola.setRolaId(id);
   rola.setArtistId(sqlite3_column_int(stmt, 0));
@@ -62,7 +62,7 @@ void RolaDao::updateRola(const VistaRola& vista) {
   sqlite3_bind_text(stmt, 7, vista.artista.c_str(), -1, SQLITE_TRANSIENT);
   sqlite3_bind_text(stmt, 8, vista.album.c_str(), -1, SQLITE_TRANSIENT);
   if (sqlite3_step(stmt) != SQLITE_DONE)
-    DaoUtils::sqliteError(stmt, "Error al actualizar el registro.");
+    DaoUtils::sqliteError(stmt, "Error al actualizar la rola.");
   sqlite3_finalize(stmt);
 }
 
@@ -73,7 +73,7 @@ void RolaDao::deleteRola(int id) {
     throw std::runtime_error("Error al preparar la consulta.");
   sqlite3_bind_int(stmt, 1, id);
   if (sqlite3_step(stmt) != SQLITE_DONE)
-    DaoUtils::sqliteError(stmt, "Error al eliminar el registro.");
+    DaoUtils::sqliteError(stmt, "Error al eliminar la rola.");
   sqlite3_finalize(stmt);
 }
 

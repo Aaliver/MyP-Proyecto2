@@ -33,7 +33,7 @@ Artista ArtistaDao::getArtista(int id) const {
     throw std::runtime_error("Error al preparar la consulta.");
   sqlite3_bind_int(stmt, 1, id);
   if (sqlite3_step(stmt) != SQLITE_ROW)
-    DaoUtils::sqliteError(stmt, "Error al obtener el registro.");
+    DaoUtils::sqliteError(stmt, "Error al obtener el artista.");
   Artista artista;
   artista.setId(id);
   artista.setIdType(sqlite3_column_int(stmt, 0));
@@ -51,7 +51,7 @@ void ArtistaDao::updateArtista(const Artista& artista) {
   sqlite3_bind_text(stmt, 2, artista.getName().c_str(), -1, SQLITE_TRANSIENT);
   sqlite3_bind_int(stmt, 3, artista.getId());
   if (sqlite3_step(stmt) != SQLITE_DONE)
-    DaoUtils::sqliteError(stmt, "Error al actualizar el registro.");
+    DaoUtils::sqliteError(stmt, "Error al actualizar el artista.");
   sqlite3_finalize(stmt);
 }
 
@@ -62,7 +62,7 @@ void ArtistaDao::deleteArtista(int id) {
     throw std::runtime_error("Error al preparar la consulta.");
   sqlite3_bind_int(stmt, 1, id);
   if (sqlite3_step(stmt) != SQLITE_DONE)
-    DaoUtils::sqliteError(stmt, "Error al eliminar el registro.");
+    DaoUtils::sqliteError(stmt, "Error al eliminar el artista.");
   sqlite3_finalize(stmt);
 }
 
