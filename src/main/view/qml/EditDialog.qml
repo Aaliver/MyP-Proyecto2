@@ -33,6 +33,7 @@ Dialog {
 
     Component {
         id: component
+
         ListView {
             id: dataView
             anchors.fill: parent
@@ -42,9 +43,12 @@ Dialog {
             model: editDialog.fields
 
             delegate: Rectangle {
+                id: listViewDelegate
                 height: 45
                 width: parent.width
                 color: palette.midlight
+                border.width: 0
+                border.color: Material.accent
                 radius: 5
 
                 RowLayout {
@@ -53,37 +57,27 @@ Dialog {
                     anchors.right: parent.right
                     anchors.verticalCenter: parent.verticalCenter
                     anchors.margins: 15
-                    spacing: 15
-
-                    property bool editing: false
-                    property string editValue: editDialog.editData != null ?
-                        editDialog.editData[modelData.display] : ""
-
-                    Text {
-                        text: modelData.name + ":"
-                        color: edit.Material.accent
-                        font.bold: true
-                    }
-
-                    Text {
-                        id: textView
-                        text: row.editValue
-                        Layout.leftMargin: 16
-                        color: palette.text
-                        visible: !row.editing
-                    }
+                    spacing: anchors.margins
 
                     TextField {
                         id: textEdit
-                        Layout.preferredWidth: 150
-                        Layout.fillHeight: parent.height
+                        Layout.fillWidth: true
+                        Layout.preferredHeight: listViewDelegate.height - 15
+                        Layout.alignment: text.trim() != "" || activeFocus ?
+                            Qt.AlignBottom : Qt.AlignVCenter
 
-                        text: row.editValue
-                        color: "#d0d0d0"
-                        visible: row.editing
+                        text: editDialog.editData != null ?
+                            editDialog.editData[modelData.display] : ""
+                        placeholderText: modelData.name
+                        font.pixelSize: 15
+                        color: palette.text
 
                         background: Rectangle {
                             color: palette.midlight
+                        }
+
+                        onActiveFocusChanged: {
+                            listViewDelegate.border.width = activeFocus ? 2 : 0
                         }
 
                         onTextEdited: {
@@ -91,20 +85,11 @@ Dialog {
                         }
                     }
 
-                    Item {
-                        Layout.fillWidth: true
-                    }
-
                     Boton {
-                        id: edit
                         Layout.preferredWidth: 40
                         Layout.preferredHeight: 40
                         icon.source: "qrc:/img/images/pen.svg"
-
-                        onClicked: {
-                            textEdit.forceActiveFocus()
-                            row.editing = true
-                        }
+                        onClicked: textEdit.forceActiveFocus()
                     }
                 }
             }
