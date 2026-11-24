@@ -6,7 +6,7 @@ Dialog {
     id: editDialog
     width: window.width / 2.5
     height: window.height / 2
-    title: "Editar Rola"
+    title: "Editar " + editNames[type]
 
     modal: true
     anchors.centerIn: Overlay.overlay
@@ -15,11 +15,12 @@ Dialog {
     property var editData: null
     property var fields: []
 
-    property int edit: EditDialog.Edit.Default
+    property int type: EditDialog.Edit.Default
+    readonly property var editNames: ["Rola", "Álbum", "Artista"]
     enum Edit {
         Rola,
         Album,
-        Artist,
+        Performer,
         Default
     }
 
@@ -97,6 +98,6 @@ Dialog {
     }
 
     onAccepted: {
-        saveData(edit, editData)
+        saveData(type, editData)
     }
 }

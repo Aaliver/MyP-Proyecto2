@@ -31,7 +31,7 @@ ToolBar {
     }
 
     function openEditor(type, fields: var) {
-        editor.edit = type
+        editor.type = type
         editor.editData = selectedData
         editor.fields = fields
         editor.open()
