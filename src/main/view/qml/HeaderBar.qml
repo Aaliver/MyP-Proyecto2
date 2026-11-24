@@ -62,6 +62,25 @@ ToolBar {
         anchors.leftMargin: 10
         icon.source: "qrc:/img/images/add.svg"
         icon.color: "transparent"
+        onClicked: {
+            aggregator.open()
+        }
+    }
+
+    AddDialog {
+        id: aggregator
+
+        onAddData: (editType, values) => {
+            switch (editType) {
+            case AddDialog.Add.Person:
+                controlador.agregaPersona(values)
+                break
+            case AddDialog.Add.Group:
+                controlador.agregaGrupo(values)
+                break
+            default:
+            }
+        }
     }
 
     Boton {

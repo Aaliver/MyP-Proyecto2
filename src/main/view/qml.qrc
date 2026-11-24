@@ -4,6 +4,7 @@
     <file>qml/Boton.qml</file>
     <file>qml/HeaderBar.qml</file>
     <file>qml/EditDialog.qml</file>
+    <file>qml/AddDialog.qml</file>
     <file>qml/SearchForm.qml</file>
     <file>qml/Body.qml</file>
     <file>qml/FooterBar.qml</file>
