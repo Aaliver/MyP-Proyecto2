@@ -44,6 +44,7 @@ void PersonaDao::updatePersona(const Persona& persona) {
   sqlite3_bind_text(stmt, 2, persona.getRealName().c_str(), -1, SQLITE_TRANSIENT);
   sqlite3_bind_text(stmt, 3, persona.getBirthDate().c_str(), -1, SQLITE_TRANSIENT);
   sqlite3_bind_text(stmt, 4, persona.getDeathDate().c_str(), -1, SQLITE_TRANSIENT);
+  sqlite3_bind_int(stmt, 5, persona.getId());
   if (sqlite3_step(stmt) != SQLITE_DONE)
     DaoUtils::sqliteError(stmt, "Error al actualizar la persona.");
   sqlite3_finalize(stmt);
