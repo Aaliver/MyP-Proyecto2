@@ -88,7 +88,7 @@ public:
    * @brief Añade una persona a la base de datos.
    * @param datos los datos de la persona a agregar.
    */
-  Q_INVOKABLE void addPersona(const QVariantMap& datos);
+  Q_INVOKABLE void agregaPersona(const QVariantMap& datos);
 
   /**
    * @brief Elimina una rola de la base de datos.

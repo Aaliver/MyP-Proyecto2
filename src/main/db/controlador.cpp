@@ -81,7 +81,7 @@ void Controlador::actualizaArtista(const QVariantMap& datos) {
   artistaDao.updateArtista(artista);
 }
 
-void Controlador::addPersona(const QVariantMap& datos) {
+void Controlador::agregaPersona(const QVariantMap& datos) {
   Persona persona;
   persona.setStageName(datos["stage_name"].toString().toStdString());
   persona.setRealName(datos["real_name"].toString().toStdString());
