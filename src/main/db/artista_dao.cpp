@@ -6,6 +6,8 @@ ArtistaDao::ArtistaDao(sqlite3* conexion) : conexion(conexion) {}
 
 std::unordered_map<std::string, int>
 ArtistaDao::addArtistas(const std::vector<Artista>& artistas) {
+  if (artistas.empty())
+    return {};
   sqlite3_stmt* stmt;
   const char* sql = "INSERT INTO performers (id_type, name) VALUES (?, ?);";
   if (sqlite3_prepare_v2(conexion, sql, -1, &stmt, nullptr) != SQLITE_OK)

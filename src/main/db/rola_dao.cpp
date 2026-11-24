@@ -7,6 +7,8 @@ RolaDao::RolaDao(sqlite3* conexion) : conexion(conexion) {}
 void RolaDao::addRolas(const std::vector<RolaNueva>& rolas,
                        std::unordered_map<std::string, int> artistas,
                        std::unordered_map<std::string, int> albums) {
+  if (rolas.empty())
+    return;
   sqlite3_stmt* stmt;
   const char* sql = "INSERT INTO rolas (id_performer, id_album, path, title, track, year, genre) VALUES (?, ?, ?, ?, ?, ?, ?);";
   if (sqlite3_prepare_v2(conexion, sql, -1, &stmt, nullptr) != SQLITE_OK)

@@ -6,6 +6,8 @@ AlbumDao::AlbumDao(sqlite3* conexion) : conexion(conexion) {}
 
 std::unordered_map<std::string, int>
 AlbumDao::addAlbums(const std::vector<Album>& albums) {
+  if (albums.empty())
+    return {};
   sqlite3_stmt* stmt;
   const char* sql = "INSERT INTO albums (path, name, year) VALUES (?, ?, ?);";
   if (sqlite3_prepare_v2(conexion, sql, -1, &stmt, nullptr) != SQLITE_OK)
