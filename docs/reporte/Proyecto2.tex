@@ -231,6 +231,7 @@ métodos necesarios para llevar a cabo las acciones solicitadas por el usuario.
   \item AlbumDao
   \item ArtistaDao
   \item PersonaDao
+  \item GrupoDao
 }
 
 El espacio de nombres \texttt{Minero} tiene una única función para minar el
@@ -279,9 +280,9 @@ la información que se muestra al usuario.
 Por otro lado, una \texttt{ParamRola} guarda todos los parámetros (opcionales) por
 los que se puede buscar una canción: título, año, genéro, álbum y artista.
 
-Continuando con los DAOs faltantes, \texttt{AlbumDao}, \texttt{ArtistaDao} y
-\texttt{PersonaDao}, como las responsabilidades que tienen son similares, nos
-limitaremos a mostrar la tarjeta CRC del DAO de los álbumes.
+Continuando con los DAOs faltantes, \texttt{AlbumDao}, \texttt{ArtistaDao},
+\texttt{PersonaDao} y \texttt{GrupoDao}, como las responsabilidades que tienen
+son similares, nos limitaremos a mostrar la tarjeta CRC del DAO de los álbumes.
 
 \crc{AlbumDao}{
   \item Realiza las consultas SQL de los álbumes.
@@ -293,8 +294,9 @@ limitaremos a mostrar la tarjeta CRC del DAO de los álbumes.
 
 De manera similar a una \texttt{Rola}, un \texttt{Album} guarda los datos de un
 album en la tabla SQL \texttt{albums}, un \texttt{Artista} guarda los datos de
-un artista en la tabla SQL \texttt{performers} y una \texttt{Persona} guarda los
-datos de un artista en la tabla SQL \texttt{persons}.
+un artista en la tabla SQL \texttt{performers}, una \texttt{Persona} guarda los
+datos de un artista en la tabla SQL \texttt{persons} y un \texttt{Grupo} guarda
+los datos de un grupo en la tabla SQL \texttt{groups}.
 
 Todos los DAOs se apoyan del espacio de nombres \texttt{DaoUtils} que tiene
 funciones auxiliares para las consultas SQL.
