@@ -5,6 +5,7 @@
 
 #include "album.hpp"
 #include "artista.hpp"
+#include "grupo.hpp"
 #include "minero.hpp"
 #include "persona.hpp"
 #include "rola.hpp"
@@ -12,7 +13,7 @@
 Controlador::Controlador(std::filesystem::path ruta, QObject* parent) :
   QObject(parent), ruta(ruta), rolaDao(db.getConexion()),
   albumDao(db.getConexion()), artistaDao(db.getConexion()),
-  personaDao(db.getConexion()) {}
+  personaDao(db.getConexion()), grupoDao(db.getConexion()) {}
 
 void Controlador::minar() {
   std::unordered_set<std::string> rolas = rolaDao.getRolasPath();
@@ -88,6 +89,14 @@ void Controlador::agregaPersona(const QVariantMap& datos) {
   persona.setBirthDate(datos["birth_date"].toString().toStdString());
   persona.setDeathDate(datos["death_date"].toString().toStdString());
   personaDao.addPersona(persona);
+}
+
+void Controlador::agregaGrupo(const QVariantMap& datos) {
+  Grupo grupo;
+  grupo.setName(datos["name"].toString().toStdString());
+  grupo.setStartDate(datos["start_date"].toString().toStdString());
+  grupo.setEndDate(datos["end_date"].toString().toStdString());
+  grupoDao.addGrupo(grupo);
 }
 
 void Controlador::eliminaRola(const QVariantMap& datos) {
