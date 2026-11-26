@@ -6,7 +6,7 @@ Dialog {
     id: addDialog
     width: window.width / 3
     height: window.height / 2
-    title: "Añadir " + addNames[type]
+    title: "Añadir Artista"
 
     modal: true
     anchors.centerIn: Overlay.overlay
