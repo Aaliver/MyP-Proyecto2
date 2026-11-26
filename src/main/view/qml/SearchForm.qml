@@ -50,7 +50,7 @@ Dialog {
                 radius: 5
 
                 RowLayout {
-                    id: row
+                    height: parent.height - 5
                     anchors.left: parent.left
                     anchors.right: parent.right
                     anchors.verticalCenter: parent.verticalCenter
@@ -58,10 +58,12 @@ Dialog {
 
                     TextField {
                         Layout.fillWidth: true
-                        Layout.fillHeight: true
+                        Layout.preferredHeight: listViewDelegate.height - 20
+                        Layout.alignment: text.trim() != "" || activeFocus ?
+                            Qt.AlignBottom : Qt.AlignVCenter
 
-                        font.pixelSize: 15
                         placeholderText: model.name
+                        font.pixelSize: 15
                         color: palette.text
 
                         background: Rectangle {

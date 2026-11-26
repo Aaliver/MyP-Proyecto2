@@ -53,7 +53,6 @@ Dialog {
                 radius: 5
 
                 RowLayout {
-                    id: row
                     anchors.left: parent.left
                     anchors.right: parent.right
                     anchors.verticalCenter: parent.verticalCenter
