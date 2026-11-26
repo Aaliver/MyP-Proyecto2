@@ -7,6 +7,20 @@
 #include <string>
 
 /**
+ * @enum IdType
+ * @brief Enumeración para los tipos de identificador de un artista.
+ */
+enum class IdType {
+
+  /* El identificador de tipo persona. */
+  Person,
+  /* El identificador de tipo grupo. */
+  Group,
+    /* El identificador de tipo desconocido. */
+  Unknown
+};
+
+/**
  * @class Artista
  * @brief Clase para los astistas de la base de datos.
  * @details Guarda los datos de un artista.
