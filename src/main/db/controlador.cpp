@@ -91,8 +91,7 @@ void Controlador::agregaPersona(const QVariantMap& datos) {
   persona.setDeathDate(datos["death_date"].toString().toStdString());
   personaDao.addPersona(persona);
   Artista artista;
-  int person = 0;
-  artista.setIdType(person);
+  artista.setIdType(static_cast<int>(IdType::Person));
   artista.setName(stageName);
   artistaDao.addArtistas({artista});
 }
@@ -105,8 +104,7 @@ void Controlador::agregaGrupo(const QVariantMap& datos) {
   grupo.setEndDate(datos["end_date"].toString().toStdString());
   grupoDao.addGrupo(grupo);
   Artista artista;
-  int group = 1;
-  artista.setIdType(group);
+  artista.setIdType(static_cast<int>(IdType::Group));
   artista.setName(name);
   artistaDao.addArtistas({artista});
 }

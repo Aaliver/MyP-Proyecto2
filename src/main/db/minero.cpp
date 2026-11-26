@@ -33,8 +33,7 @@ namespace {
 
   Artista nuevoArtista(std::string& name) {
     Artista artista;
-    int unknown = 2;
-    artista.setIdType(unknown);
+    artista.setIdType(static_cast<int>(IdType::Unknown));
     artista.setName(name);
     return artista;
   }
