@@ -84,19 +84,31 @@ void Controlador::actualizaArtista(const QVariantMap& datos) {
 
 void Controlador::agregaPersona(const QVariantMap& datos) {
   Persona persona;
-  persona.setStageName(datos["stage_name"].toString().toStdString());
+  std::string stageName = datos["stage_name"].toString().toStdString();
+  persona.setStageName(stageName);
   persona.setRealName(datos["real_name"].toString().toStdString());
   persona.setBirthDate(datos["birth_date"].toString().toStdString());
   persona.setDeathDate(datos["death_date"].toString().toStdString());
   personaDao.addPersona(persona);
+  Artista artista;
+  int person = 0;
+  artista.setIdType(person);
+  artista.setName(stageName);
+  artistaDao.addArtistas({artista});
 }
 
 void Controlador::agregaGrupo(const QVariantMap& datos) {
   Grupo grupo;
-  grupo.setName(datos["name"].toString().toStdString());
+  std::string name = datos["name"].toString().toStdString();
+  grupo.setName(name);
   grupo.setStartDate(datos["start_date"].toString().toStdString());
   grupo.setEndDate(datos["end_date"].toString().toStdString());
   grupoDao.addGrupo(grupo);
+  Artista artista;
+  int group = 1;
+  artista.setIdType(group);
+  artista.setName(name);
+  artistaDao.addArtistas({artista});
 }
 
 void Controlador::eliminaRola(const QVariantMap& datos) {
