@@ -69,8 +69,8 @@ Dialog {
     ListModel {
         id: addGroupModel
         ListElement { name: "Nombre"; field: "name" }
-        ListElement { name: "Fecha de inicio"; field: "birth_date" }
-        ListElement { name: "Fecha de finalización"; field: "death_date" }
+        ListElement { name: "Fecha de inicio"; field: "start_date" }
+        ListElement { name: "Fecha de finalización"; field: "end_date" }
     }
 
     Component {
